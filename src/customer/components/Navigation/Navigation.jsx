@@ -3,10 +3,19 @@ import { Bars3Icon, ShoppingCartIcon, XMarkIcon, UserIcon } from '@heroicons/rea
 import { Gi3dHammer } from "react-icons/gi";
 
 const navigation = [
-  { name: 'Earn $$$', href: '#', current: true },
+  { name: 'Earn $$$', href: '#', current: false },
   { name: 'Happy Customers', href: '#', current: false },
   { name: 'Newsletter', href: '#', current: false },
   { name: 'Wholesale', href: '#', current: false },
+]
+
+const categories = [
+  {name:"Model Toys", href: "#", current:false }, 
+  {name:"Shop By Category", href: "#", current:false }, 
+  {name:"Weekly Deals", href: "#", current:false }, 
+  {name:"Shipping and Returns", href: "#", current:false }, 
+  {name:"Customer Support", href: "#", current:false }, 
+  {name:"FAQs", href: "#", current:false }
 ]
 
 function classNames(...classes) {
@@ -112,7 +121,7 @@ export default function Navigation() {
 
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pt-2 pb-3">
-          {navigation.map((item) => (
+          {categories.map((item) => (
             <DisclosureButton
               key={item.name}
               as="a"
@@ -131,10 +140,26 @@ export default function Navigation() {
       </DisclosurePanel>
     </Disclosure>
 
-    <div className="bg-gray-600 text-center py-1 text-sm">
-        <a href="#" className="text-gray-800 font-bold px-3 py-2 rounded-md">
-          Check out our products!
-        </a>
+    <div className="bg-gray-600 text-center h-20 py-3 text-lg">
+      <div className="sm:block">
+        <div className="flex justify-center space-x-4">
+          {categories.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              aria-current={item.current ? 'page' : undefined}
+              className={classNames(
+                item.current
+                  ? 'bg-gray-900 text-white'
+                  : 'text-gray-300 hover:bg-white/5 hover:text-white',
+                'rounded-md px-4 py-3 text-lg font-medium'
+              )}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
       </div>
+    </div>
   </>)
 }
