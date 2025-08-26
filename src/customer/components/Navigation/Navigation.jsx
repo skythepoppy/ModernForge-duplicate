@@ -1,12 +1,12 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, ShoppingCartIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline'
 import { Gi3dHammer } from "react-icons/gi";
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Earn $$$', href: '#', current: true },
+  { name: 'Happy Customers', href: '#', current: false },
+  { name: 'Newsletter', href: '#', current: false },
+  { name: 'Wholesale', href: '#', current: false },
 ]
 
 function classNames(...classes) {
@@ -15,9 +15,17 @@ function classNames(...classes) {
 
 export default function Navigation() {
   return (
+    <>
+
+     <div className="bg-orange-500 text-black text-center py-1 text-sm font">
+        <a href="#" className="text-black font-bold px-3 py-2 rounded-md">
+          Free shipping on orders over $100!
+        </a>
+      </div>
+
     <Disclosure as="nav" className="relative bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
+        <div className="relative flex h-20 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* Mobile menu button*/}
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
@@ -29,7 +37,7 @@ export default function Navigation() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
-              <Gi3dHammer className="text-orange-500 w-8 h-8 mr-2" />
+              <Gi3dHammer className="text-orange-500 w-12 h-12 mr-2" />
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
@@ -40,7 +48,7 @@ export default function Navigation() {
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(
                       item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium',
+                      'rounded-md px-4 py-3 text-lg font-medium',
                     )}
                   >
                     {item.name}
@@ -49,26 +57,13 @@ export default function Navigation() {
               </div>
             </div>
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button
-              type="button"
-              className="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="size-6" />
-            </button>
 
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
-              <MenuButton className="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+              <MenuButton className="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500">
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">Open user menu</span>
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  className="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10"
-                />
+                <UserIcon aria-hidden="true" className="text-gray-300 w-8 h-8" />
               </MenuButton>
 
               <MenuItems
@@ -101,6 +96,16 @@ export default function Navigation() {
                 </MenuItem>
               </MenuItems>
             </Menu>
+
+            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <button
+              type="button"
+              className="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+            >
+              <span className="absolute -inset-1.5" />
+              <span className="sr-only">View notifications</span>
+              <ShoppingCartIcon aria-hidden="true" className="text-gray-300 w-8 h-8" />
+            </button>
           </div>
         </div>
       </div>
@@ -120,9 +125,16 @@ export default function Navigation() {
             >
               {item.name}
             </DisclosureButton>
+          
           ))}
         </div>
       </DisclosurePanel>
     </Disclosure>
-  )
+
+    <div className="bg-gray-600 text-center py-1 text-sm">
+        <a href="#" className="text-gray-800 font-bold px-3 py-2 rounded-md">
+          Check out our products!
+        </a>
+      </div>
+  </>)
 }
