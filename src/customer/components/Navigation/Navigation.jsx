@@ -1,6 +1,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline'
 import { Gi3dHammer } from "react-icons/gi";
+import AlertCarousel from './AlertCarousel';
 
 const navigation = [
   { name: 'Earn $$$', href: '#', current: false },
@@ -18,20 +19,27 @@ const categories = [
   {name:"FAQs", href: "#", current:false }
 ]
 
+
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Navigation() {
+
+   const alerts = [
+    "Free shipping for orders over $100!",
+    "New DIY kits just released!",
+    "Sign up for our newsletter and get 10% off!"
+  ];
   return (
     <>
-
-     <div className="bg-orange-500 text-black text-center py-1 text-sm font">
-        <a href="#" className="text-black font-bold px-3 py-2 rounded-md">
-          Free shipping on orders over $100!
-        </a>
+     {/* Alerts */}
+     <div className="w-full bg-orange-500">
+        <AlertCarousel alerts={alerts} />
       </div>
 
+      
     <Disclosure as="nav" className="relative bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-20 items-center justify-between">
@@ -76,7 +84,7 @@ export default function Navigation() {
                         </svg>
                     </div>
                     <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search more... " required />
-                    <button type="submit" class="text-gray-700 absolute end-2.5 bottom-2.5 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+                    <button type="submit" class="text-gray-700 absolute end-2.5 bottom-2.5 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-bold rounded-lg text-sm px-4 py-2">Search</button>
                 </div>
             </form>
 
