@@ -8,6 +8,11 @@ const HomePage = () => {
             <MainCarousel/>
 
             <div>
+  <h1 className="text-black block rounded-md px-5 py-4 text-3xl font-bold">
+    Latest Releases
+  </h1>
+</div>
+            <div>
                 <HomeSectionCarousel/>
             </div>
         </div>

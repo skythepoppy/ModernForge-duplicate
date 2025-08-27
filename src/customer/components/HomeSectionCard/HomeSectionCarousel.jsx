@@ -40,7 +40,7 @@ const HomeSectionCarousel = () => {
     {
       imageSrc: legoporsche,
       title: 'Lego Porsche (White)',
-      description: '1000 piece Lego Porsche Set',
+      description: '1000 piece Lego Porsche',
     }
   ];
 
