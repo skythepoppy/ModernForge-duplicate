@@ -140,9 +140,10 @@ export default function Navigation() {
       </DisclosurePanel>
     </Disclosure>
 
-    <div className="bg-gray-600 text-center h-20 py-3 text-lg">
+          {/*categories for shopping*/}
+    <div className="bg-gray-600 text-center h-16 py-3 text-md">
       <div className="sm:block">
-        <div className="flex justify-center space-x-4">
+        <div className="flex justify-center space-x-6">
           {categories.map((item) => (
             <a
               key={item.name}
@@ -152,7 +153,7 @@ export default function Navigation() {
                 item.current
                   ? 'bg-gray-900 text-white'
                   : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                'rounded-md px-4 py-3 text-lg font-medium'
+                'rounded-md px-3 py-2 text-lg font-medium'
               )}
             >
               {item.name}
