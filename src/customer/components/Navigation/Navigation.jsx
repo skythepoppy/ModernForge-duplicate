@@ -11,12 +11,12 @@ const navigation = [
 ]
 
 const categories = [
-  {name:"Model Toys", href: "#", current:false }, 
-  {name:"Shop By Category", href: "#", current:false }, 
-  {name:"Weekly Deals", href: "#", current:false }, 
-  {name:"Shipping and Returns", href: "#", current:false }, 
-  {name:"Customer Support", href: "#", current:false }, 
-  {name:"FAQs", href: "#", current:false }
+  { name: "Model Toys", href: "#", current: false },
+  { name: "Shop By Category", href: "#", current: false },
+  { name: "Weekly Deals", href: "#", current: false },
+  { name: "Shipping and Returns", href: "#", current: false },
+  { name: "Customer Support", href: "#", current: false },
+  { name: "FAQs", href: "#", current: false }
 ]
 
 
@@ -27,68 +27,68 @@ function classNames(...classes) {
 
 export default function Navigation() {
 
-   const alerts = [
+  const alerts = [
     "Free shipping for orders over $100!",
     "New DIY kits just released!",
     "Sign up for our newsletter and get 10% off!"
   ];
   return (
     <>
-     {/* Alerts */}
-     <div className="w-full bg-orange-500">
+      {/* Alerts */}
+      <div className="w-full bg-orange-500">
         <AlertCarousel alerts={alerts} />
       </div>
 
-      
-    <Disclosure as="nav" className="relative bg-gray-800">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-20 items-center justify-between">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Mobile menu button*/}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
-              <span className="absolute -inset-0.5" />
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
-              <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block" />
-            </DisclosureButton>
-          </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex shrink-0 items-center">
-              <Gi3dHammer className="text-orange-500 w-12 h-12 mr-2" />
+
+      <Disclosure as="nav" className="relative bg-gray-800">
+        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="relative flex h-20 items-center justify-between">
+            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              {/* Mobile menu button*/}
+              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
+                <span className="absolute -inset-0.5" />
+                <span className="sr-only">Open main menu</span>
+                <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
+                <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block" />
+              </DisclosureButton>
             </div>
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
-                    className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                      'rounded-md px-4 py-3 text-lg font-medium',
-                    )}
-                  >
-                    {item.name}
-                  </a>
-                ))}
+            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex shrink-0 items-center">
+                <Gi3dHammer className="text-orange-500 w-12 h-12 mr-2" />
               </div>
-            </div>
-            
-            {/*Search Bar*/}
-            <form class="max-w-md mx-auto">   
+              <div className="hidden sm:ml-6 sm:block">
+                <div className="flex space-x-4">
+                  {navigation.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      aria-current={item.current ? 'page' : undefined}
+                      className={classNames(
+                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
+                        'rounded-md px-4 py-3 text-lg font-medium',
+                      )}
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/*Search Bar*/}
+              <form class="max-w-md mx-auto">
                 <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                        </svg>
-                    </div>
-                    <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search more... " required />
-                    <button type="submit" class="text-gray-700 absolute end-2.5 bottom-2.5 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-bold rounded-lg text-sm px-4 py-2">Search</button>
+                  <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                  </div>
+                  <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search more... " required />
+                  <button type="submit" class="text-gray-700 absolute end-2.5 bottom-2.5 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-bold rounded-lg text-sm px-4 py-2">Search</button>
                 </div>
-            </form>
+              </form>
 
-          </div>
+            </div>
 
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
@@ -130,60 +130,60 @@ export default function Navigation() {
             </Menu>
 
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button
-              type="button"
-              className="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <ShoppingCartIcon aria-hidden="true" className="text-gray-300 w-8 h-8" />
-            </button>
+              <button
+                type="button"
+                className="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+              >
+                <span className="absolute -inset-1.5" />
+                <span className="sr-only">View notifications</span>
+                <ShoppingCartIcon aria-hidden="true" className="text-gray-300 w-8 h-8" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <DisclosurePanel className="sm:hidden">
+          <div className="space-y-1 px-2 pt-2 pb-3">
+            {categories.map((item) => (
+              <DisclosureButton
+                key={item.name}
+                as="a"
+                href={item.href}
+                aria-current={item.current ? 'page' : undefined}
+                className={classNames(
+                  item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
+                  'block rounded-md px-3 py-2 text-base font-medium',
+                )}
+              >
+                {item.name}
+              </DisclosureButton>
+
+            ))}
+          </div>
+        </DisclosurePanel>
+      </Disclosure>
+
+      {/*categories for shopping*/}
+      <div className="bg-gray-600 text-center h-16 py-3 text-md">
+        <div className="sm:block">
+          <div className="flex justify-center space-x-6">
+            {categories.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                aria-current={item.current ? 'page' : undefined}
+                className={classNames(
+                  item.current
+                    ? 'bg-gray-900 text-white'
+                    : 'text-gray-300 hover:bg-white/5 hover:text-white',
+                  'rounded-md px-3 py-2 text-lg font-medium'
+                )}
+              >
+                {item.name}
+              </a>
+            ))}
           </div>
         </div>
       </div>
-
-      <DisclosurePanel className="sm:hidden">
-        <div className="space-y-1 px-2 pt-2 pb-3">
-          {categories.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as="a"
-              href={item.href}
-              aria-current={item.current ? 'page' : undefined}
-              className={classNames(
-                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                'block rounded-md px-3 py-2 text-base font-medium',
-              )}
-            >
-              {item.name}
-            </DisclosureButton>
-          
-          ))}
-        </div>
-      </DisclosurePanel>
-    </Disclosure>
-
-          {/*categories for shopping*/}
-    <div className="bg-gray-600 text-center h-16 py-3 text-md">
-      <div className="sm:block">
-        <div className="flex justify-center space-x-6">
-          {categories.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              aria-current={item.current ? 'page' : undefined}
-              className={classNames(
-                item.current
-                  ? 'bg-gray-900 text-white'
-                  : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                'rounded-md px-3 py-2 text-lg font-medium'
-              )}
-            >
-              {item.name}
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
-  </>)
+    </>)
 }

@@ -19,7 +19,7 @@ const HomeSectionCarousel = () => {
   const cardData = [
     {
       imageSrc: metalbike,
-      title: '"Build-It-Yourself" Metal Bike Kit',
+      title: 'DIY Metal Bike Kit',
       description: 'Metal Bike Kit (includes tools)',
     },
     {
@@ -29,12 +29,12 @@ const HomeSectionCarousel = () => {
     },
     {
       imageSrc: propplane,
-      title: 'Wooden Propeller Plane Kit',
-      description: 'Wooden Prop Plane Kit (includes tools)',
+      title: 'Wooden Plane Kit',
+      description: 'Prop Plane Kit (includes tools)',
     },
     {
       imageSrc: metalcar,
-      title: '"Build-It-Yourself" Metal Car Kit',
+      title: 'DIY Metal Car Kit',
       description: 'Metal Car Kit (includes tools)',
     },
     {
@@ -55,7 +55,7 @@ const HomeSectionCarousel = () => {
 
   return (
     <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
-     <AliceCarousel
+      <AliceCarousel
         mouseTracking
         items={items}
         disableButtonsControls
