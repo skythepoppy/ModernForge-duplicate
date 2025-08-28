@@ -11,7 +11,6 @@ const navigation = [
 ]
 
 const categories = [
-  { name: "Model Toys", href: "#", current: false },
   { name: "Shop By Category", href: "#", current: false },
   { name: "Weekly Deals", href: "#", current: false },
   { name: "Shipping and Returns", href: "#", current: false },
@@ -40,7 +39,7 @@ export default function Navigation() {
       </div>
 
 
-      <Disclosure as="nav" className="relative bg-gray-800">
+      <Disclosure as="nav" className="relative bg-gray-900">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-20 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -79,7 +78,7 @@ export default function Navigation() {
                 <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                   <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <svg class="w-4 h-4 text-gray-800 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                   </div>
@@ -92,10 +91,12 @@ export default function Navigation() {
 
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
-              <MenuButton className="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500">
+              <MenuButton className="relative flex flex-col items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500">
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">Open user menu</span>
+
                 <UserIcon aria-hidden="true" className="text-gray-300 w-8 h-8" />
+                <span className="text-gray-300 text-xs font-medium mt-1">Sign In</span>
               </MenuButton>
 
               <MenuItems
@@ -164,7 +165,7 @@ export default function Navigation() {
       </Disclosure>
 
       {/*categories for shopping*/}
-      <div className="bg-gray-600 text-center h-16 py-3 text-md">
+      <div className="bg-gray-800 text-center h-16 py-3 text-md">
         <div className="sm:block">
           <div className="flex justify-center space-x-6">
             {categories.map((item) => (

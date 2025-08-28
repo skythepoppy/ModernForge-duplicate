@@ -1,17 +1,36 @@
 import React from 'react'
 import { Gi3dHammer } from "react-icons/gi";
-import { Grid, Typography, Button, Box} from '@mui/material'
+import { Grid, Typography, Button, TextField, Box } from '@mui/material'
 
 const Footer = () => {
     return (
         <div>
+
             <Grid className='bg-gray-900 text-gray-300 text-center mt-10'
                 container
                 spacing={3}
                 justifyContent="center"
                 alignItems="center"
                 textAlign="center"
-                sx={{ bgcolor: "gray-900", color: "gray-300", py: 3 }}>
+                sx={{ bgcolor: "gray-900", color: "#D1D5DB", py: 3 }}>
+                <Grid container justifyContent="center" sx={{ bgcolor: "#111827", py: 5 }}>
+                    <Grid item xs={12} sm={8} md={6} textAlign="center">
+                        <Typography variant="h6" sx={{ mb: 2, color: "#D1D5DB" }}>
+                            Newsletter
+                        </Typography>
+                        <Box component="form" sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
+                            <TextField
+                                variant="outlined"
+                                placeholder="Sign up now..."
+                                size="small"
+                                sx={{ bgcolor: "#D1D5DB", borderRadius: 1, width: "70%" }}
+                            />
+                            <Button variant="contained" sx={{ bgcolor: "#F97316", "&:hover": { bgcolor: "darkorange" } }}>
+                                Subscribe
+                            </Button>
+                        </Box>
+                    </Grid>
+                </Grid>
 
                 <Grid item xs={12} sm={6} md={3} textAlign={'left'}>
                     <Gi3dHammer className="text-orange-500 w-12 h-12 mx-auto mb-3" />
