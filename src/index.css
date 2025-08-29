@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 body {
   margin: 0;
+  @apply font-sans;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -16,9 +19,10 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: sans-serif; /* optional but recommended */
+  font-family: 'Roboto',sans-serif; /* optional but recommended */
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+

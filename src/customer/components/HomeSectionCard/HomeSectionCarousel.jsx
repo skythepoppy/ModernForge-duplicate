@@ -39,8 +39,8 @@ const HomeSectionCarousel = () => {
     },
     {
       imageSrc: legoporsche,
-      title: 'Lego Porsche (White)',
-      description: '1000 piece Lego Porsche',
+      title: '(Snap-fit Blocks) White Porsche',
+      description: '1000 piece snap-fit block Porsche',
     }
   ];
 
