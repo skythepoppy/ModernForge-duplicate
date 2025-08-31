@@ -16,7 +16,7 @@ const HomeSectionCarousel = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('http://localhost:5000/api/cartoystoys'); // your backend API URL
+        const response = await fetch('http://localhost:5050/api/toys'); // your backend API URL
         const data = await response.json();
 
         // Map your data to match expected structure and handle image paths

@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS CarToys (
   title VARCHAR(255),
   description TEXT,
   price DECIMAL(10,2),
+  quantity INT,
   discountedPrice DECIMAL(10,2)
 )
 `;
@@ -28,6 +29,6 @@ connection.query(createTableQuery, (err, result) => {
     console.error('Error creating table:', err);
     return;
   }
-  console.log('✅ CarToys table created or already exists.');
+  console.log('Toys table created or already exists.');
   connection.end();
 });
