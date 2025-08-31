@@ -1,48 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import HomeSectionCard from './HomeSectionCard';
-import metalbike from './homesectionassets/metalbike.jpg';
-import propplane from './homesectionassets/propplane.jpg';
-import woodmonstertoy from './homesectionassets/woodmonstertoy.jpg';
-import metalcar from './homesectionassets/metalcar.jpg';
-import legoporsche from './homesectionassets/legoporsche.jpg';
-
 
 const HomeSectionCarousel = () => {
+  const [cardData, setCardData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const responsive = {
     0: { items: 1 },
     720: { items: 3 },
     1024: { items: 4 },
   };
 
-  const cardData = [
-    {
-      imageSrc: metalbike,
-      title: 'DIY Metal Bike Kit',
-      description: 'Metal Bike Kit (includes tools)',
-    },
-    {
-      imageSrc: woodmonstertoy,
-      title: 'Wooden Car Kit',
-      description: 'Wooden Car Kit (includes tools)',
-    },
-    {
-      imageSrc: propplane,
-      title: 'Wooden Plane Kit',
-      description: 'Prop Plane Kit (includes tools)',
-    },
-    {
-      imageSrc: metalcar,
-      title: 'DIY Metal Car Kit',
-      description: 'Metal Car Kit (includes tools)',
-    },
-    {
-      imageSrc: legoporsche,
-      title: '(Snap-fit Blocks) White Porsche',
-      description: '1000 piece snap-fit block Porsche',
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('http://localhost:5000/api/cartoystoys'); // your backend API URL
+        const data = await response.json();
+
+        // Map your data to match expected structure and handle image paths
+        const mappedData = data.map(item => ({
+          imageSrc: `/assets/${item.image}`, // assuming images are served from public/assets
+          title: item.title,
+          description: item.description,
+        }));
+
+        setCardData(mappedData);
+      } catch (error) {
+        console.error('Error fetching toy data:', error);
+      } finally {
+        setLoading(false);
+      }
     }
-  ];
+
+    fetchData();
+  }, []);
 
   const items = cardData.map((card, index) => (
     <HomeSectionCard
@@ -52,6 +45,10 @@ const HomeSectionCarousel = () => {
       description={card.description}
     />
   ));
+
+  if (loading) {
+    return <p>Loading toys...</p>;
+  }
 
   return (
     <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>

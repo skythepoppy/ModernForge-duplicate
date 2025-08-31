@@ -1,43 +1,33 @@
-const db = require('./db');
+// server/createTable.js
+const mysql = require('mysql2');
+require('dotenv').config();
 
-async function createTable() {
-  const exists = await db.schema.hasTable('toys');
-  if (!exists) {
-    await db.schema.createTable('toys', (table) => {
-      table.increments('id');
-      table.string('brand');
-      table.string('title');
-      table.string('description');
-      table.decimal('price', 10, 2);
-      table.decimal('discountedPrice', 10, 2);
-      table.string('image');
-    });
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
 
-    await db('toys').insert([
-      {
-        brand: 'Lehmann Crafts',
-        title: 'Wooden Monster Car',
-        description: 'Wooden Car Kit for ages 12 and up (includes tools)',
-        price: 54.99,
-        discountedPrice: 52.99,
-        image: 'https://via.placeholder.com/150',
-      },
-      {
-        brand: 'SkyJets',
-        title: 'Snap-Fit Jumbo Jet',
-        description: 'Durable snap-fit plane kit.',
-        price: 49.99,
-        discountedPrice: 45.99,
-        image: 'https://via.placeholder.com/150',
-      },
-    ]);
+connection.connect();
 
-    console.log('✅ Table created and data inserted');
-  } else {
-    console.log('⚠️ Table already exists');
+const createTableQuery = `
+CREATE TABLE IF NOT EXISTS CarToys (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  image VARCHAR(255),
+  brand VARCHAR(100),
+  title VARCHAR(255),
+  description TEXT,
+  price DECIMAL(10,2),
+  discountedPrice DECIMAL(10,2)
+)
+`;
+
+connection.query(createTableQuery, (err, result) => {
+  if (err) {
+    console.error('Error creating table:', err);
+    return;
   }
-
-  process.exit();
-}
-
-createTable();
+  console.log('✅ CarToys table created or already exists.');
+  connection.end();
+});
