@@ -1,21 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
-import Navigation from './customer/components/Navigation/Navigation';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from './customer/components/Layout/Layout';
 import HomePage from './customer/components/Navigation/Pages/HomePage/HomePage';
-import Footer from './customer/components/Footer/Footer';
+
 
 function App() {
   return (
-    <div className="App">
-      <Navigation/>
-      <div>
-        <HomePage/>
-      </div>
-
-      <div>
-        <Footer/>
-      </div>
-    </div>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
