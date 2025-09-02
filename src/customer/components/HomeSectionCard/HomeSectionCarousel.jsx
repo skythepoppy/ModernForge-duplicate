@@ -16,12 +16,12 @@ const HomeSectionCarousel = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('http://localhost:5050/api/toys'); // your backend API URL
+        const response = await fetch('http://localhost:5050/api/toys');
         const data = await response.json();
 
-        // Map your data to match expected structure and handle image paths
+        // Use the signed URL from backend
         const mappedData = data.map(item => ({
-          imageSrc: `/assets/${item.image}`, // assuming images are served from public/assets
+          imageSrc: item.imageUrl, // <- signed URL
           title: item.title,
           description: item.description,
         }));
@@ -46,9 +46,7 @@ const HomeSectionCarousel = () => {
     />
   ));
 
-  if (loading) {
-    return <p>Loading toys...</p>;
-  }
+  if (loading) return <p>Loading toys...</p>;
 
   return (
     <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
