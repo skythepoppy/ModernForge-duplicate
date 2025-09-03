@@ -3,7 +3,7 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import HomeSectionCard from './HomeSectionCard';
 
-const HomeSectionCarousel = () => {
+const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
   const [cardData, setCardData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,15 +16,27 @@ const HomeSectionCarousel = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('http://localhost:5050/api/toys');
-        const data = await response.json();
+        // Construct URL with query params
+        const url = new URL('http://localhost:5050/api/toys');
+        if (category) url.searchParams.append('category', category);
+        if (status) url.searchParams.append('status', status);
 
-        // Use the signed URL from backend
-        const mappedData = data.map(item => ({
-          imageSrc: item.imageUrl, // <- signed URL
-          title: item.title,
-          description: item.description,
-        }));
+        console.log('Fetching toys from:', url.toString());
+
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('Fetched toy data:', data);
+
+        // Map the data and limit to first `limit` items
+        const mappedData = data
+          .map(item => ({
+            imageSrc: item.imageUrl,
+            brand: item.brand,
+            title: item.title,
+            price: item.price,
+            discountedPrice: item.discountedPrice,
+          }))
+          .slice(0, limit); // <-- frontend limiting
 
         setCardData(mappedData);
       } catch (error) {
@@ -35,14 +47,16 @@ const HomeSectionCarousel = () => {
     }
 
     fetchData();
-  }, []);
+  }, [category, status, limit]);
 
   const items = cardData.map((card, index) => (
     <HomeSectionCard
       key={index}
       imageSrc={card.imageSrc}
+      brand={card.brand}
       title={card.title}
-      description={card.description}
+      price={card.price}
+      discountedPrice={card.discountedPrice}
     />
   ));
 
