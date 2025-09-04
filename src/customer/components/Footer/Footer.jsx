@@ -5,7 +5,6 @@ import { Grid, Typography, Button, TextField, Box } from '@mui/material'
 
 const Footer = () => {
     const navigate = useNavigate();
-
     return (
         <div>
 
