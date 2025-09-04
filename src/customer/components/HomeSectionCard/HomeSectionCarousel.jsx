@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import HomeSectionCard from './HomeSectionCard';
@@ -6,6 +6,7 @@ import HomeSectionCard from './HomeSectionCard';
 const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
   const [cardData, setCardData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const carouselRef = useRef(null); // <-- ref to control carousel
 
   const responsive = {
     0: { items: 1 },
@@ -16,27 +17,22 @@ const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        // Construct URL with query params
         const url = new URL('http://localhost:5050/api/toys');
         if (category) url.searchParams.append('category', category);
         if (status) url.searchParams.append('status', status);
 
-        console.log('Fetching toys from:', url.toString());
-
         const response = await fetch(url);
         const data = await response.json();
-        console.log('Fetched toy data:', data);
 
-        // Map the data and limit to first `limit` items
         const mappedData = data
           .map(item => ({
             imageSrc: item.imageUrl,
             brand: item.brand,
-            title: item.title,
+            title: item.item,
             price: item.price,
             discountedPrice: item.discountedPrice,
           }))
-          .slice(0, limit); // <-- frontend limiting
+          .slice(0, limit);
 
         setCardData(mappedData);
       } catch (error) {
@@ -63,16 +59,33 @@ const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
   if (loading) return <p>Loading toys...</p>;
 
   return (
-    <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+    <div className="relative w-full max-w-6xl mx-auto px-12 py-6">
+      {/* Carousel */}
       <AliceCarousel
+        ref={carouselRef}
         mouseTracking
         items={items}
-        disableButtonsControls
-        autoPlay
-        autoPlayInterval={3000}
-        infinite
+        autoPlay={false}
+        infinite={true}
+        disableDotsControls={true}
+        disableButtonsControls={true} // hide default arrows
         responsive={responsive}
       />
+
+      {/* Custom Arrows */}
+      <button
+        onClick={() => carouselRef.current.slidePrev()}
+        className="absolute left-0 top-1/2 -translate-y-1/2 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 z-10"
+      >
+        ◀
+      </button>
+
+      <button
+        onClick={() => carouselRef.current.slideNext()}
+        className="absolute right-0 top-1/2 -translate-y-1/2 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 z-10"
+      >
+        ▶
+      </button>
     </div>
   );
 };

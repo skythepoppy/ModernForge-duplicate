@@ -19,6 +19,7 @@ const MainCarousel = () => {
             <AliceCarousel
                 animationType="fadeout"
                 animationDuration={800}
+                disableDotsControls={true}
                 disableButtonsControls
                 infinite
                 items={items}
