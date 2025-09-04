@@ -1,6 +1,7 @@
 import React from 'react'
 import MainCarousel from '../../HomeCarousel/MainCarousel'
 import HomeSectionCarousel from '../../../HomeSectionCard/HomeSectionCarousel'
+import FAQSection from './FAQSection'
 
 const HomePage = () => {
     return (
@@ -21,7 +22,7 @@ const HomePage = () => {
                     type="button"
                     className="mt-4 text-black-500 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-bold rounded-lg text-sm px-6 py-2"
                 >
-                    Shop Automobiles
+                    Shop All Automobiles 
                 </button>
             </div>
 
@@ -33,7 +34,7 @@ const HomePage = () => {
                     type="button"
                     className="mt-4 text-black-500 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-bold rounded-lg text-sm px-6 py-2"
                 >
-                    Shop Aircrafts
+                    Shop All Aircrafts
                 </button>
             </div>
 
@@ -45,7 +46,7 @@ const HomePage = () => {
                     type="button"
                     className="mt-4 text-black-500 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-bold rounded-lg text-sm px-6 py-2"
                 >
-                    Shop Watercrafts
+                    Shop All Watercrafts
                 </button>
             </div>
 
@@ -57,9 +58,11 @@ const HomePage = () => {
                     type="button"
                     className="mt-4 text-black-500 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-bold rounded-lg text-sm px-6 py-2"
                 >
-                    Shop Programmables
+                    Shop All Programmables
                 </button>
             </div>
+
+            <FAQSection />
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom';
 import { Gi3dHammer } from "react-icons/gi";
 import AlertCarousel from './AlertCarousel';
 
@@ -15,7 +16,7 @@ const categories = [
   { name: "Weekly Deals", href: "#", current: false },
   { name: "Shipping and Returns", href: "#", current: false },
   { name: "Customer Support", href: "#", current: false },
-  { name: "FAQs", href: "#", current: false }
+  { name: "FAQs", href: "/faq", current: false }
 ]
 
 
@@ -53,14 +54,16 @@ export default function Navigation() {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex shrink-0 items-center">
+                <Link to="/">
                 <Gi3dHammer className="text-orange-500 w-12 h-12 mr-2" />
+                </Link>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       aria-current={item.current ? 'page' : undefined}
                       className={classNames(
                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
@@ -68,7 +71,7 @@ export default function Navigation() {
                       )}
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -148,7 +151,7 @@ export default function Navigation() {
             {categories.map((item) => (
               <DisclosureButton
                 key={item.name}
-                as="a"
+                as={Link}
                 href={item.href}
                 aria-current={item.current ? 'page' : undefined}
                 className={classNames(
@@ -169,9 +172,9 @@ export default function Navigation() {
         <div className="sm:block">
           <div className="flex justify-center space-x-6">
             {categories.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 aria-current={item.current ? 'page' : undefined}
                 className={classNames(
                   item.current
@@ -181,7 +184,7 @@ export default function Navigation() {
                 )}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
