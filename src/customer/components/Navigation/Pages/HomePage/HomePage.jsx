@@ -1,7 +1,7 @@
 import React from 'react'
 import MainCarousel from '../../HomeCarousel/MainCarousel'
 import HomeSectionCarousel from '../../../HomeSectionCard/HomeSectionCarousel'
-import FAQSection from '../FAQSection'
+import FAQSection from '../FAQPage/FAQSection'
 import modernforgeAffiliate from '../../HomeCarousel/homeassets/modernforgeAffiliate.png';
 import modernforgeIG from '../../HomeCarousel/homeassets/modernforgeIG.png';
 

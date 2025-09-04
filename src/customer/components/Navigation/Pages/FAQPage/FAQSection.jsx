@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FAQData from "./FAQPage/PageData/FAQData";
+import FAQData from "./PageData/FAQData";
 
 
 const FAQSection = () => {
