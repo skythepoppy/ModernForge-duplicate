@@ -75,14 +75,14 @@ const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
       {/* Custom Arrows */}
       <button
         onClick={() => carouselRef.current.slidePrev()}
-        className="absolute left-0 top-1/2 -translate-y-1/2 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 z-10"
+        className="absolute left-0 top-1/2 -translate-y-1/2 bg-orange-500 text-black-500 p-3 rounded-full shadow-lg hover:bg-orange-600 z-10"
       >
         ◀
       </button>
 
       <button
         onClick={() => carouselRef.current.slideNext()}
-        className="absolute right-0 top-1/2 -translate-y-1/2 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 z-10"
+        className="absolute right-0 top-1/2 -translate-y-1/2 bg-orange-500 text-black-500 p-3 rounded-full shadow-lg hover:bg-orange-600 z-10"
       >
         ▶
       </button>

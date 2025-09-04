@@ -1,5 +1,6 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom';
 import { Gi3dHammer } from "react-icons/gi";
 import AlertCarousel from './AlertCarousel';
 
@@ -15,7 +16,7 @@ const categories = [
   { name: "Weekly Deals", href: "#", current: false },
   { name: "Shipping and Returns", href: "#", current: false },
   { name: "Customer Support", href: "#", current: false },
-  { name: "FAQs", href: "#", current: false }
+  { name: "FAQs", href: "/faq", current: false }
 ]
 
 
@@ -58,7 +59,7 @@ export default function Navigation() {
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
                       href={item.href}
                       aria-current={item.current ? 'page' : undefined}
@@ -68,7 +69,7 @@ export default function Navigation() {
                       )}
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -148,7 +149,7 @@ export default function Navigation() {
             {categories.map((item) => (
               <DisclosureButton
                 key={item.name}
-                as="a"
+                as={Link}
                 href={item.href}
                 aria-current={item.current ? 'page' : undefined}
                 className={classNames(
@@ -169,7 +170,7 @@ export default function Navigation() {
         <div className="sm:block">
           <div className="flex justify-center space-x-6">
             {categories.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
                 aria-current={item.current ? 'page' : undefined}
@@ -181,7 +182,7 @@ export default function Navigation() {
                 )}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
