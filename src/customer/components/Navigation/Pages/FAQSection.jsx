@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import FAQData from './PageData/FAQData'
+import FAQData from "./HomePage/PageData/FAQData";
+
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState(null);
