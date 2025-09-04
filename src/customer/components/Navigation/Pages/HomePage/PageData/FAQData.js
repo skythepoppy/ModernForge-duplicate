@@ -22,6 +22,10 @@ const FAQData = [
     answer: "Yes, we offer special pricing for bulk orders, especially for DIY kits for schools, clubs, or events. Contact our sales team with the quantity and products you’re interested in for a custom quote."
   },
   {
+    question: "Do you have guides on how to build the kits?",
+    answer: "Yes, we have video guides on our Youtube Channel that you can follow along to when building the DIY Kits. Keep in mind that each kit comes with its own instructions as well from its respective brand. "
+  },
+  {
     question: "How do I contact customer support?",
     answer: "You can reach our support team via email at support@modernforge.com or call us at (123) 456-7890 between 9 AM and 6 PM CST. We also provide a live chat option on our website for instant assistance."
   },
