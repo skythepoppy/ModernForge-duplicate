@@ -4,7 +4,7 @@ import Layout from './customer/components/Layout/Layout';
 import HomePage from './customer/components/Navigation/Pages/HomePage/HomePage';
 import FAQPage from './customer/components/Navigation/Pages/FAQPage/FAQPage';
 import SupportPage from "./customer/components/Navigation/Pages/SupportPage/SupportPage";
-import SupportPage from './customer/components/Navigation/Pages/SupportPage/SupportPage';
+
 
 
 function App() {

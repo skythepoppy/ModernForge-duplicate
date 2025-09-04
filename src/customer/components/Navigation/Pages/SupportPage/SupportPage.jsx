@@ -9,12 +9,15 @@ const SupportPage = () => {
         message: ""
     });
 
+    const [loading, setLoading] = useState(false);
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try {
             const response = await fetch('http://localhost:5050/api/support', {
@@ -34,6 +37,8 @@ const SupportPage = () => {
         } catch (error) {
             console.error('Error sending support request:', error);
             alert('An error occurred while sending your message.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -68,6 +73,7 @@ const SupportPage = () => {
                             required
                             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-orange-500 focus:border-orange-500"
                             placeholder="Your full name"
+                            disabled={loading}
                         />
                     </div>
 
@@ -83,6 +89,7 @@ const SupportPage = () => {
                             required
                             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-orange-500 focus:border-orange-500"
                             placeholder="you@example.com"
+                            disabled={loading}
                         />
                     </div>
 
@@ -98,6 +105,7 @@ const SupportPage = () => {
                             required
                             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-orange-500 focus:border-orange-500"
                             placeholder="Order issue, product question, etc."
+                            disabled={loading}
                         />
                     </div>
 
@@ -113,15 +121,36 @@ const SupportPage = () => {
                             rows="5"
                             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-orange-500 focus:border-orange-500"
                             placeholder="Describe your issue or question..."
+                            disabled={loading}
                         />
                     </div>
 
                     <button
                         type="submit"
-                        className="w-full bg-orange-500 hover:bg-orange-600 text-black-500 font-bold py-3 rounded-lg focus:outline-none focus:ring-4 focus:ring-orange-300"
+                        className={`w-full font-bold py-3 rounded-lg focus:outline-none focus:ring-4 flex justify-center items-center gap-2 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'
+                            }`}
+                        disabled={loading}
                     >
-                        Send Message
+                        {loading && (
+                            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                ></circle>
+                                <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                ></path>
+                            </svg>
+                        )}
+                        {loading ? "Sending..." : "Send Message"}
                     </button>
+
                 </form>
             </div>
         </div>
