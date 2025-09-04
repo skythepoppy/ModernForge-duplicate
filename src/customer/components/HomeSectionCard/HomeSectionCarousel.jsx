@@ -3,7 +3,7 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import HomeSectionCard from './HomeSectionCard';
 
-const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
+const HomeSectionCarousel = ({ category, status, limit = 5, autoPlay = false, showArrows }) => {
   const [cardData, setCardData] = useState([]);
   const [loading, setLoading] = useState(true);
   const carouselRef = useRef(null); // ref to control carousel
@@ -23,7 +23,7 @@ const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
 
         const response = await fetch(url);
         const data = await response.json();
-        
+
 
         const mappedData = data
           .map(item => ({
@@ -66,28 +66,33 @@ const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
         ref={carouselRef}
         mouseTracking
         items={items}
-        autoPlay={false}
+        autoPlay={autoPlay}
+        autoPlayInterval={3000}
         infinite={true}
         disableDotsControls={true}
-        disableButtonsControls={true} 
+        disableButtonsControls={true}
         responsive={responsive}
         autoHeight
       />
 
       {/* Custom Arrows */}
-      <button
-        onClick={() => carouselRef.current.slidePrev()}
-        className="absolute left-0 top-1/2 -translate-y-1/2 bg-orange-500 text-black-500 p-3 rounded-full shadow-lg hover:bg-orange-600 z-10"
-      >
-        ◀
-      </button>
+      {showArrows && (
+        <>
+          <button
+            onClick={() => carouselRef.current.slidePrev()}
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-orange-500 text-black-500 p-3 rounded-full shadow-lg hover:bg-orange-600 z-10"
+          >
+            ◀
+          </button>
 
-      <button
-        onClick={() => carouselRef.current.slideNext()}
-        className="absolute right-0 top-1/2 -translate-y-1/2 bg-orange-500 text-black-500 p-3 rounded-full shadow-lg hover:bg-orange-600 z-10"
-      >
-        ▶
-      </button>
+          <button
+            onClick={() => carouselRef.current.slideNext()}
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-orange-500 text-black-500 p-3 rounded-full shadow-lg hover:bg-orange-600 z-10"
+          >
+            ▶
+          </button>
+        </>
+      )}
     </div>
   );
 };
