@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SupportPage = () => {
     const [formData, setFormData] = useState({
@@ -21,7 +22,11 @@ const SupportPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12">
+        <div className="min-h-screen bg-gray-50 py-12 pt-6 pb-12">
+            {/* Breadcrumb */}
+            <div className="max-w-7xl text-center mx-auto px-4 mb-2 text-gray-600 text-sm">
+                <Link to="/" className="hover:underline">Home</Link> &gt; <span className="font-semibold">Customer Support</span>
+            </div>
             <div className="max-w-4xl mx-auto px-6 bg-white shadow-md rounded-lg p-8">
                 {/* Title */}
                 <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
@@ -96,7 +101,7 @@ const SupportPage = () => {
 
                     <button
                         type="submit"
-                        className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg focus:outline-none focus:ring-4 focus:ring-orange-300"
+                        className="w-full bg-orange-500 hover:bg-orange-600 text-black-500 font-bold py-3 rounded-lg focus:outline-none focus:ring-4 focus:ring-orange-300"
                     >
                         Send Message
                     </button>
