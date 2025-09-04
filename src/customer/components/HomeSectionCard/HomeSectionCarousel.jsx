@@ -6,7 +6,7 @@ import HomeSectionCard from './HomeSectionCard';
 const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
   const [cardData, setCardData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const carouselRef = useRef(null); // <-- ref to control carousel
+  const carouselRef = useRef(null); // ref to control carousel
 
   const responsive = {
     0: { items: 1 },
@@ -59,7 +59,7 @@ const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
   if (loading) return <p>Loading toys...</p>;
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto px-12 py-6">
+    <div className="relative w-full max-w-6xl mx-auto px-12 py-6 ">
       {/* Carousel */}
       <AliceCarousel
         ref={carouselRef}
@@ -68,8 +68,9 @@ const HomeSectionCarousel = ({ category, status, limit = 5 }) => {
         autoPlay={false}
         infinite={true}
         disableDotsControls={true}
-        disableButtonsControls={true} // hide default arrows
+        disableButtonsControls={true} 
         responsive={responsive}
+        autoHeight
       />
 
       {/* Custom Arrows */}
