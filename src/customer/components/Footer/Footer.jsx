@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { Gi3dHammer } from "react-icons/gi";
 import { Grid, Typography, Button, TextField, Box } from '@mui/material'
 
@@ -63,7 +64,7 @@ const Footer = () => {
                     <Button color="inherit">About</Button><br />
                     <Button color="inherit">Newsletter</Button><br />
                     <Button color="inherit">Earn $$$</Button><br />
-                    <Button color="inherit">Blog</Button>
+                    <Link to="/faq">FAQs</Link>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Typography variant='h6' gutterBottom>Support</Typography>
