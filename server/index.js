@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const AWS = require('aws-sdk');
 const cors = require('cors');
-const nodemailer = require('nodemailer'); // <- Import Nodemailer
+const nodemailer = require('nodemailer'); 
 require('dotenv').config();
 
 const app = express();
@@ -65,8 +65,10 @@ app.get('/api/toys', (req, res) => {
 
         const toysWithUrls = results.map(toy => {
             if (toy.image) return { ...toy, imageUrl: getSignedUrl(toy.image) };
+
             return toy;
         });
+        
 
         res.json(toysWithUrls);
     });
