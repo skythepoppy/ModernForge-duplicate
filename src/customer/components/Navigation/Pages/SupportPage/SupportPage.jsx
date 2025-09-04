@@ -13,12 +13,28 @@ const SupportPage = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you’d send formData to your backend / email service (e.g. Nodemailer, SendGrid, etc.)
-        console.log("Form submitted:", formData);
-        alert("Your message has been sent! Our support team will reach out soon.");
-        setFormData({ name: "", email: "", subject: "", message: "" }); // reset form
+
+        try {
+            const response = await fetch('http://localhost:5050/api/support', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message || 'Your message has been sent! Our support team will reach out soon.');
+                setFormData({ name: "", email: "", subject: "", message: "" }); // reset form
+            } else {
+                alert(data.message || 'Something went wrong. Please try again later.');
+            }
+        } catch (error) {
+            console.error('Error sending support request:', error);
+            alert('An error occurred while sending your message.');
+        }
     };
 
     return (
@@ -27,6 +43,7 @@ const SupportPage = () => {
             <div className="max-w-7xl text-center mx-auto px-4 mb-2 text-gray-600 text-sm">
                 <Link to="/" className="hover:underline">Home</Link> &gt; <span className="font-semibold">Customer Support</span>
             </div>
+
             <div className="max-w-4xl mx-auto px-6 bg-white shadow-md rounded-lg p-8">
                 {/* Title */}
                 <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
