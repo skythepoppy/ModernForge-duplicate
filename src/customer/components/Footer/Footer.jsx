@@ -1,9 +1,11 @@
-import React from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Gi3dHammer } from "react-icons/gi";
 import { Grid, Typography, Button, TextField, Box } from '@mui/material'
 
 const Footer = () => {
+    const navigate = useNavigate();
+
     return (
         <div>
 
@@ -34,6 +36,7 @@ const Footer = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={3} textAlign={'left'}>
+                    
                     <Gi3dHammer className="text-orange-500 w-12 h-12 mx-auto mb-3" />
                     <Typography variant="body2" sx={{ maxWidth: "250px", mx: "auto", textAlign: "center" }}>
                         At ModelForge, our mission is to inspire builders of all ages to craft, play, and enjoy the art of building together.
@@ -64,12 +67,12 @@ const Footer = () => {
                     <Button color="inherit">About</Button><br />
                     <Button color="inherit">Newsletter</Button><br />
                     <Button color="inherit">Earn $$$</Button><br />
-                    <Link to="/faq">FAQs</Link>
+                    <Button color="inherit" onClick={() => navigate("/faq")}>FAQs</Button>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Typography variant='h6' gutterBottom>Support</Typography>
                     <Button color="inherit">Help Center</Button><br />
-                    <Button color="inherit">Contact Us</Button><br />
+                    <Button color="inherit" onClick={() => navigate("/support")}>Contact Us</Button><br />
                     <Button color="inherit">Shipping Info</Button><br />
                     <Button color="inherit">Returns</Button>
                 </Grid>

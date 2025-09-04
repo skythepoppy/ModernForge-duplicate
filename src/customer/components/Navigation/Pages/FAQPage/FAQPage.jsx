@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import FAQSection from '../FAQSection';
+import FAQSection from './FAQSection';
 
 const FAQPage = () => {
   return (
