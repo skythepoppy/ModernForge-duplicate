@@ -54,14 +54,16 @@ export default function Navigation() {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex shrink-0 items-center">
+                <Link to="/">
                 <Gi3dHammer className="text-orange-500 w-12 h-12 mr-2" />
+                </Link>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       aria-current={item.current ? 'page' : undefined}
                       className={classNames(
                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
@@ -172,7 +174,7 @@ export default function Navigation() {
             {categories.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 aria-current={item.current ? 'page' : undefined}
                 className={classNames(
                   item.current
