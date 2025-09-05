@@ -69,7 +69,7 @@ const Footer = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Typography variant='h6' gutterBottom>Support</Typography>
-                    <Button color="inherit">Help Center</Button><br />
+                    <Button color="inherit" onClick={() => navigate("/support")}>Help Center</Button><br />
                     <Button color="inherit" onClick={() => navigate("/support")}>Contact Us</Button><br />
                     <Button color="inherit" onClick={() => navigate("/shippingreturns")}>Shipping Info</Button><br />
                     <Button color="inherit">Returns</Button>
