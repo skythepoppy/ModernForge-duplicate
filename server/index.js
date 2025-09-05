@@ -186,5 +186,58 @@ Products of Interest: ${productInterest}
 });
 
 
+// --- API route to affiliate partners --
+
+app.post('/api/affiliate', async (req, res) =>{
+    const {name, email, website, audienceSize, niche, comments} = req.body;
+
+    if(!name || !email){
+        return res.status(400).json({message: "Name and Email are required."});
+    }
+
+    // Inserting into mySQL
+    const sql = `INSERT INTO affilaite_applications
+    (name, email, website, audience_size, niche, comments)
+    VALUES (?, ?, ?, ?, ?, ?)`
+    ;
+
+    const params = [name, email, website, audienceSize, niche, comments];
+
+    connection.query(sql, params, async(err, result) => {
+        if (err){
+            console.error(err);
+            return res.status(500).json({message: "Failed to save application"});
+        }
+
+        try{
+            // email confirmation to modernforge email
+            const transporter = nodemailer.createTransport({
+                host: process.env.SMTP_HOST,
+                port: Number(process.env.SMTP_PORT),
+                secure: process.env.SMTP_SECURE === 'true', 
+                auth: {
+                    user: process.env.SMTP_USER,
+                    pass: process.env.SMTP_PASS,
+                },
+            });
+
+            await transporter.sendMail({
+                from: `"${name}" <${email}>`, 
+                to: process.env.SUPPORT_EMAIL,
+                subject: `[Affiliate Application] ${name}`,
+                text: `Name: ${name}\nEmail: ${email}\nWebsite: 
+                ${website}\nAudience Size: ${audienceSize}\nNiche: ${niche}\nComments: ${comments}`,
+            });
+            
+            res.status(200).json({message: 'Application submitted successfully'});
+
+        } catch (error){
+            console.error('Email error:', error);
+            res.status(500).json({message: 'Application saved, but email failed'});
+        }
+    });
+});
+
+
 // --- Start server ---
 app.listen(port, () => console.log(`Server running on port ${port}`));
