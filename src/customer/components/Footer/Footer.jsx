@@ -1,5 +1,4 @@
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Gi3dHammer } from "react-icons/gi";
 import { Grid, Typography, Button, TextField, Box } from '@mui/material'
 
@@ -70,9 +69,9 @@ const Footer = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Typography variant='h6' gutterBottom>Support</Typography>
-                    <Button color="inherit">Help Center</Button><br />
+                    <Button color="inherit" onClick={() => navigate("/support")}>Help Center</Button><br />
                     <Button color="inherit" onClick={() => navigate("/support")}>Contact Us</Button><br />
-                    <Button color="inherit">Shipping Info</Button><br />
+                    <Button color="inherit" onClick={() => navigate("/shippingreturns")}>Shipping Info</Button><br />
                     <Button color="inherit">Returns</Button>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>

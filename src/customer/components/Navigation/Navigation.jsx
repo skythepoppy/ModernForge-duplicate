@@ -14,7 +14,7 @@ const navigation = [
 const categories = [
   { name: "Shop By Category", href: "#", current: false },
   { name: "Weekly Deals", href: "#", current: false },
-  { name: "Shipping and Returns", href: "#", current: false },
+  { name: "Shipping and Returns", href: "/shippingreturns", current: false },
   { name: "Customer Support", href: "/support", current: false },
   { name: "FAQs", href: "/faq", current: false }
 ]
