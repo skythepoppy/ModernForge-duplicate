@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ShippingReturnsData from './ShippingReturnsData/ShippingReturnsData';
+import { FaShippingFast } from "react-icons/fa";
 
 const ShippingReturnsSection = () => {
   const [openIndexes, setOpenIndexes] = useState({}); // Track open items per section
@@ -13,6 +14,11 @@ const ShippingReturnsSection = () => {
 
   return (
     <div className="max-w-4xl mx-auto py-12">
+
+      <div className="flex items-center justify-center mb-6">
+        <FaShippingFast className="text-orange-500 w-12 h-12 mr-2" />
+      </div>
+
       <h2 className="text-3xl font-bold text-center mb-8">Shipping and Returns</h2>
 
       {ShippingReturnsData.map((section, sectionIndex) => (

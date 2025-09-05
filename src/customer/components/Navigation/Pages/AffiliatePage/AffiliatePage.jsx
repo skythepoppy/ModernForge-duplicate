@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { PiHandCoinsBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
 
@@ -7,7 +7,7 @@ const AffiliatePage = () => {
         name: "",
         email: "",
         website: "",
-        audienceSize:"",
+        audienceSize: "",
         niche: "",
         comments: ""
     });
@@ -33,7 +33,7 @@ const AffiliatePage = () => {
 
             if (response.ok) {
                 alert(data.message || 'Your message has been sent! Our affiliate team will reach out soon.');
-                setFormData({ name: "", email: "", website: "", audienceSize: "", niche: "" , comments:""}); // reset form
+                setFormData({ name: "", email: "", website: "", audienceSize: "", niche: "", comments: "" }); // reset form
             } else {
                 alert(data.message || 'Something went wrong. Please try again later.');
             }
@@ -53,18 +53,18 @@ const AffiliatePage = () => {
 
             <div className="max-w-4xl mx-auto px-6 bg-white shadow-md rounded-lg p-8">
                 <div className="flex items-center justify-center mb-6">
-                <PiHandCoinsBold className="text-orange-500 w-12 h-12 mr-2" />
-            </div>
+                    <PiHandCoinsBold className="text-orange-500 w-12 h-12 mr-2" />
+                </div>
                 {/* Title */}
                 <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
                     Become an Affiliate Partner with us!
                 </h1>
                 <p className="text-center text-gray-600 mb-8">
-                    Are you a content creator? Earn money by showing your audience where to get authentic DIY 
+                    Are you a content creator? Earn money by showing your audience where to get authentic DIY
                     toy kits!
                 </p>
                 <p className="text-center font-bold text-gray-600 mb-8">
-                    Earn money and exclusive news regarding the latest releases. 
+                    Earn money and exclusive news regarding the latest releases.
                 </p>
 
                 {/* Contact Form */}
@@ -131,7 +131,7 @@ const AffiliatePage = () => {
                             placeholder="Enter your estimated audience size"
                             disabled={loading}
                         />
-                        
+
                     </div>
 
                     <div>
@@ -148,7 +148,7 @@ const AffiliatePage = () => {
                             placeholder="Describe your adience, content focus, and what makes your niche unique."
                             disabled={loading}
                         />
-                        
+
                     </div>
 
                     <div>
@@ -164,7 +164,7 @@ const AffiliatePage = () => {
                             placeholder="Any additional comments you'd like to add."
                             disabled={loading}
                         />
-                        
+
                     </div>
 
                     <button

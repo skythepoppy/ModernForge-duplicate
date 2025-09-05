@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FAQData from "./PageData/FAQData";
+import { FaRegQuestionCircle } from "react-icons/fa";
 
 
 const FAQSection = () => {
@@ -11,6 +12,9 @@ const FAQSection = () => {
 
   return (
     <div className="max-w-4xl mx-auto py-12">
+      <div className="flex items-center justify-center mb-6">
+        <FaRegQuestionCircle className="text-orange-500 w-12 h-12 mr-2" />
+      </div>
       <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
       <div className="space-y-4">
         {FAQData.map((faq, index) => (
