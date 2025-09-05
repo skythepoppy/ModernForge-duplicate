@@ -56,7 +56,7 @@ const AffiliatePage = () => {
                     Become an Affiliate Partner with us!
                 </h1>
                 <p className="text-center text-gray-600 mb-8">
-                    Are you a content creator? Earn money by showing your adience where to get authentic DIY 
+                    Are you a content creator? Earn money by showing your audience where to get authentic DIY 
                     toy kits!
                 </p>
                 <p className="text-center font-bold text-gray-600 mb-8">
@@ -115,7 +115,7 @@ const AffiliatePage = () => {
 
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-700">
-                            audienceSize
+                            Audience Size
                         </label>
                         <input
                             type="number"
@@ -195,4 +195,4 @@ const AffiliatePage = () => {
     );
 };
 
-export default SupportPage;
+export default AffiliatePage;

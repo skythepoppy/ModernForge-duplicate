@@ -223,7 +223,7 @@ app.post('/api/affiliate', async (req, res) => {
 
             await transporter.sendMail({
                 from: `"${name}" <${email}>`,
-                to: process.env.SUPPORT_EMAIL,
+                to: process.env.SMTP_USER,
                 subject: `[Affiliate Application] ${name}`,
                 text: `
 New affiliate application:
@@ -259,7 +259,7 @@ app.post('/api/affiliate/:id/status', async (req, res) => {
     // update DB
     const sql = `UPDATE affiliate_applications SET status = ? WHERE id = ?`;
     connection.query(sql, [status, id], async (err, result) => {
-        if(err || !rows.length){
+        if(err ||result.affectedRows === 0){
                 return res.status(500).json({message: "Failed to update status"});
             };
 
@@ -272,6 +272,9 @@ app.post('/api/affiliate/:id/status', async (req, res) => {
 
             const {email, name} = rows[0];
 
+            console.log('Sending email to:', email, 'Name:', name); //TEST
+
+
             try{
                 const transporter = nodemailer.createTransport({
                     host: process.env.SMTP_HOST,
@@ -282,7 +285,7 @@ app.post('/api/affiliate/:id/status', async (req, res) => {
 
                 await transporter.sendMail({
                     from: `"ModernForge Team" <${process.env.SMTP_USER}>`,
-                    replyTo: email, 
+                    to: String(email), 
                     subject: `Your Affiliate Application Status: ${status}`, 
                     text: `Hi ${name}, \n\nYour affiliate application has been ${status}.\n\nThank you for applying!\n- ModernForge Team`,
                 });
