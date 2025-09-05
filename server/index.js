@@ -146,7 +146,7 @@ app.post('/api/wholesale', async (req, res) => {
         // Construct email content
         const mailOptions = {
             from: `"${contactName}" <${email}>`,
-            to: process.env.WHOLESALE_EMAIL || process.env.SUPPORT_EMAIL, // fallback to SUPPORT_EMAIL
+            to: process.env.SUPPORT_EMAIL, // fallback to SUPPORT_EMAIL
             subject: `[Wholesale Inquiry] ${businessName}`,
             text: `
 Business Name: ${businessName}
