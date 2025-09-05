@@ -63,7 +63,7 @@ const Footer = () => {
                 <Grid item xs={12} sm={6} md={3}>
                     <Typography variant='h6' gutterBottom>Quick Links</Typography>
                     <Button color="inherit">About</Button><br />
-                    <Button color="inherit">Newsletter</Button><br />
+                    <Button color="inherit" onClick={() => navigate("/wholesale")}>Wholesale</Button><br />
                     <Button color="inherit">Earn $$$</Button><br />
                     <Button color="inherit" onClick={() => navigate("/faq")}>FAQs</Button>
                 </Grid>

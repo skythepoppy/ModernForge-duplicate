@@ -8,7 +8,7 @@ const navigation = [
   { name: 'Earn $$$', href: '#', current: false },
   { name: 'Happy Customers', href: '#', current: false },
   { name: 'Newsletter', href: '#', current: false },
-  { name: 'Wholesale', href: '#', current: false },
+  { name: 'Wholesale', href: '/wholesale', current: false },
 ]
 
 const categories = [
