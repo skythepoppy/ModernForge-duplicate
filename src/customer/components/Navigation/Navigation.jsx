@@ -5,7 +5,7 @@ import { Gi3dHammer } from "react-icons/gi";
 import AlertCarousel from './AlertCarousel';
 
 const navigation = [
-  { name: 'Earn $$$', href: '#', current: false },
+  { name: 'Earn $$$', href: '/affiliate', current: false },
   { name: 'Happy Customers', href: '#', current: false },
   { name: 'Newsletter', href: '#', current: false },
   { name: 'Wholesale', href: '/wholesale', current: false },

@@ -5,7 +5,8 @@ import HomePage from './customer/components/Navigation/Pages/HomePage/HomePage';
 import FAQPage from './customer/components/Navigation/Pages/FAQPage/FAQPage';
 import SupportPage from "./customer/components/Navigation/Pages/SupportPage/SupportPage";
 import ShippingReturnsPage from './customer/components/Navigation/Pages/ShippingReturns/ShippingReturnsPage';
-import WholesalePage from './customer/components/Navigation/Pages/WholesalePage/WholesalePage'
+import WholesalePage from './customer/components/Navigation/Pages/WholesalePage/WholesalePage';
+import AffiliatePage from './customer/components/Navigation/Pages/AffiliatePage/AffiliatePage';
 
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/support" element={<SupportPage />} />
           <Route path="/shippingreturns" element ={<ShippingReturnsPage />} />
           <Route path="/wholesale" element ={<WholesalePage />} />
+          <Route path='/affiliate' element={<AffiliatePage />} />
         </Routes>
       </Layout>
     </Router>

@@ -93,7 +93,7 @@ app.post('/api/support', async (req, res) => {
 
         const mailOptions = {
             from: `"${name}" <${email}>`,
-            replyTo:email,
+            replyTo: email,
             to: process.env.SMTP_USER,
             subject: `[Support Form] ${subject}`,
             text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
@@ -152,7 +152,7 @@ app.post('/api/wholesale', async (req, res) => {
         // email content
         const mailOptions = {
             from: `"${contactName}" <${email}>`,
-            replyTo:email,
+            replyTo: email,
             to: process.env.SMTP_USER,
             subject: `[Wholesale Inquiry] ${businessName}`,
             text: `
@@ -183,6 +183,121 @@ Products of Interest: ${productInterest}
         });
         res.status(500).json({ message: 'Email could not be sent' });
     }
+});
+
+
+// --- API route to affiliate partners --
+
+app.post('/api/affiliate', async (req, res) => {
+    const { name, email, website, audienceSize, niche, comments } = req.body;
+
+    if (!name || !email) {
+        return res.status(400).json({ message: "Name and Email are required." });
+    }
+
+    // Inserting into mySQL
+    const sql = `INSERT INTO affiliate_applications
+    (name, email, website, audience_size, niche, comments)
+    VALUES (?, ?, ?, ?, ?, ?)`
+        ;
+
+    const params = [name, email, website, audienceSize, niche, comments];
+
+    connection.query(sql, params, async (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Failed to save application" });
+        }
+
+        try {
+            // email confirmation to modernforge email
+            const transporter = nodemailer.createTransport({
+                host: process.env.SMTP_HOST,
+                port: Number(process.env.SMTP_PORT),
+                secure: process.env.SMTP_SECURE === 'true',
+                auth: {
+                    user: process.env.SMTP_USER,
+                    pass: process.env.SMTP_PASS,
+                },
+            });
+
+            await transporter.sendMail({
+                from: `"${name}" <${email}>`,
+                to: process.env.SMTP_USER,
+                subject: `[Affiliate Application] ${name}`,
+                text: `
+New affiliate application:
+
+Name: ${name}
+Email: ${email}
+Website: ${website}
+Audience Size: ${audienceSize}
+Niche: ${niche}
+Comments: ${comments}
+Status: pending
+                `,
+            });
+
+            res.status(200).json({ message: 'Application submitted successfully' });
+
+        } catch (error) {
+            console.error('Email error:', error);
+            res.status(500).json({ message: 'Application saved, but email failed' });
+        }
+    });
+});
+
+// -- API route for admins to update status and user auto-notification --
+app.post('/api/affiliate/:id/status', async (req, res) => {
+    const {id} = req.params;
+    const {status} = req.body;
+
+    if(!['accepted', 'rejected'].includes(status)){
+        return res.status(400).json({message: 'Invalid status'});
+    }
+
+    // update DB
+    const sql = `UPDATE affiliate_applications SET status = ? WHERE id = ?`;
+    connection.query(sql, [status, id], async (err, result) => {
+        if(err ||result.affectedRows === 0){
+                return res.status(500).json({message: "Failed to update status"});
+            };
+
+        // get user email for notification
+        const getEmailSql = `SELECT email, name FROM affiliate_applications WHERE id = ?`;
+        connection.query(getEmailSql, [id], async (err, rows) =>{
+            if(err || !rows.length){
+                return res.status(500).json({message: "User not found"});
+            };
+
+            const {email, name} = rows[0];
+
+            console.log('Sending email to:', email, 'Name:', name); //TEST
+
+
+            try{
+                const transporter = nodemailer.createTransport({
+                    host: process.env.SMTP_HOST,
+                    port: Number(process.env.SMTP_PORT),
+                    secure: process.env.SMTP_SECURE === 'true',
+                    auth: {user: process.env.SMTP_USER, pass: process.env.SMTP_PASS},
+                });
+
+                await transporter.sendMail({
+                    from: `"ModernForge Team" <${process.env.SMTP_USER}>`,
+                    to: String(email), 
+                    subject: `Your Affiliate Application Status: ${status}`, 
+                    text: `Hi ${name}, \n\nYour affiliate application has been ${status}.\n\nThank you for applying!\n- ModernForge Team`,
+                });
+                
+                res.status(200).json({message: `Status updated to ${status} and notified.`});
+            } catch (error){
+                console.error('Email error:', error);
+                res.status(500).json({message: 'Status updated but failed to send email'});
+            }
+
+        });
+    });
 });
 
 
