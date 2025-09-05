@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const AWS = require('aws-sdk');
 const cors = require('cors');
-const nodemailer = require('nodemailer'); 
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
@@ -68,7 +68,7 @@ app.get('/api/toys', (req, res) => {
 
             return toy;
         });
-        
+
 
         res.json(toysWithUrls);
     });
@@ -102,6 +102,73 @@ app.post('/api/support', async (req, res) => {
         res.status(200).json({ message: 'Email sent successfully' });
     } catch (error) {
         console.error(error);
+        res.status(500).json({ message: 'Email could not be sent' });
+    }
+});
+
+// --- API route to handle wholesale form ---
+app.post('/api/wholesale', async (req, res) => {
+    const {
+        businessName,
+        businessType,
+        contactName,
+        email,
+        phone,
+        website,
+        shippingAddress,
+        billingAddress,
+        taxId,
+        estimatedOrderVolume,
+        productInterest
+    } = req.body;
+
+    // Basic validation
+    if (
+        !businessName || !businessType || !contactName || !email || !phone ||
+        !website || !shippingAddress || !billingAddress || !taxId ||
+        !estimatedOrderVolume || !productInterest
+    ) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    try {
+        // transporter
+        const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT),
+            secure: process.env.SMTP_SECURE === 'true',
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        });
+
+        // Construct email content
+        const mailOptions = {
+            from: `"${contactName}" <${email}>`,
+            to: process.env.WHOLESALE_EMAIL || process.env.SUPPORT_EMAIL, // fallback to SUPPORT_EMAIL
+            subject: `[Wholesale Inquiry] ${businessName}`,
+            text: `
+Business Name: ${businessName}
+Business Type: ${businessType}
+Contact Name: ${contactName}
+Email: ${email}
+Phone: ${phone}
+Website: ${website}
+Shipping Address: ${shippingAddress}
+Billing Address: ${billingAddress}
+Tax ID / Reseller Certificate: ${taxId}
+Estimated Order Volume: ${estimatedOrderVolume}
+Products of Interest: ${productInterest}
+            `,
+        };
+
+        // Send email
+        await transporter.sendMail(mailOptions);
+
+        res.status(200).json({ message: 'Wholesale inquiry sent successfully' });
+    } catch (error) {
+        console.error('Error sending wholesale email:', error);
         res.status(500).json({ message: 'Email could not be sent' });
     }
 });
