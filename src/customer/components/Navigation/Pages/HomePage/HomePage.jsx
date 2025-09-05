@@ -67,17 +67,32 @@ const HomePage = () => {
             </div>
 
             {/* Homepage Graphics */}
-            <div className="flex justify-center items-center space-x-6 mt-16 mb-12">
-                <img
-                    src={modernforgeIG}
-                    alt="Instagram Graphic"
-                    className="w-1/3 rounded-lg shadow-lg object-cover"
-                />
-                <img
-                    src={modernforgeAffiliate}
-                    alt="Affiliate Graphic"
-                    className="w-1/3 rounded-lg shadow-lg object-cover"
-                />
+            <div className="w-screen flex justify-center mt-16 mb-12">
+                <div className="flex flex-row gap-6">
+                    <a
+                        href="https://www.instagram.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <img
+                            src={modernforgeIG}
+                            alt="Instagram Graphic"
+                            className="w-96 rounded-lg shadow-lg object-cover"
+                        />
+                    </a>
+
+                    <a
+                        href="/wholesale"
+                        target="_self"
+                        rel="noopener noreferrer"
+                    >
+                        <img
+                            src={modernforgeAffiliate}
+                            alt="Affiliate Graphic"
+                            className="w-96 rounded-lg shadow-lg object-cover"
+                        />
+                    </a>
+                </div>
             </div>
 
             <FAQSection />
