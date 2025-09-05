@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import { PiHandCoinsBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
 
 const AffiliatePage = () => {
@@ -51,6 +52,9 @@ const AffiliatePage = () => {
             </div>
 
             <div className="max-w-4xl mx-auto px-6 bg-white shadow-md rounded-lg p-8">
+                <div className="flex items-center justify-center mb-6">
+                <PiHandCoinsBold className="text-orange-500 w-12 h-12 mr-2" />
+            </div>
                 {/* Title */}
                 <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
                     Become an Affiliate Partner with us!
