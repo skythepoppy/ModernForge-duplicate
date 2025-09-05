@@ -54,7 +54,6 @@ const SupportPage = () => {
                 alert(data.message || 'Something went wrong. Please try again later.');
             }
         } catch (error) {
-            console.error('Error sending support request:', error);
             alert('An error occurred while sending your message.');
         } finally {
             setLoading(false);
@@ -74,8 +73,12 @@ const SupportPage = () => {
                     Wholesale Form
                 </h1>
                 <p className="text-center text-gray-600 mb-8">
-                   Interested in ordering in bulk? Fill out the form below and our team will get back to you
-                   in 24-48 hours regarding additional bulk-order details. 
+                    Interested in ordering in bulk? Fill out the form below and our team will get back to you
+                    in 24-48 hours regarding additional bulk-order details.
+                </p>
+                <p className="text-center text-gray-600 font-bold mb-8">
+                    Notice: Wholesale form is limited to only one product of interest. If you have multiple products
+                    of interest, you must fill out multiple forms.
                 </p>
 
                 {/* Contact Form */}
@@ -112,7 +115,7 @@ const SupportPage = () => {
                         />
                     </div>
 
-                     <div>
+                    <div>
                         <label className="block mb-2 text-sm font-medium text-gray-700">
                             Contact Name
                         </label>
@@ -123,7 +126,7 @@ const SupportPage = () => {
                             onChange={handleChange}
                             required
                             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-orange-500 focus:border-orange-500"
-                            placeholder="Name of your contact"
+                            placeholder="Name of contact"
                             disabled={loading}
                         />
                     </div>
@@ -144,7 +147,7 @@ const SupportPage = () => {
                         />
                     </div>
 
-                     <div>
+                    <div>
                         <label className="block mb-2 text-sm font-medium text-gray-700">
                             Phone Number
                         </label>
@@ -180,14 +183,14 @@ const SupportPage = () => {
                         <label className="block mb-2 text-sm font-medium text-gray-700">
                             Shipping Address
                         </label>
-                        <textarea
+                        <input
+                            type="text"
                             name="shippingAddress"
                             value={formData.shippingAddress}
                             onChange={handleChange}
                             required
-                            rows="5"
                             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-orange-500 focus:border-orange-500"
-                            placeholder="123 Main st, City, State, ZIP"
+                            placeholder="123 Main St, City, State, ZIP"
                             disabled={loading}
                         />
                     </div>
@@ -196,14 +199,14 @@ const SupportPage = () => {
                         <label className="block mb-2 text-sm font-medium text-gray-700">
                             Billing Address
                         </label>
-                        <textarea
+                        <input
+                            type="text"
                             name="billingAddress"
                             value={formData.billingAddress}
                             onChange={handleChange}
                             required
-                            rows="5"
                             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-orange-500 focus:border-orange-500"
-                            placeholder="123 Main st, City, State, ZIP"
+                            placeholder="123 Main St, City, State, ZIP"
                             disabled={loading}
                         />
                     </div>
@@ -228,14 +231,14 @@ const SupportPage = () => {
                         <label className="block mb-2 text-sm font-medium text-gray-700">
                             Product Interest
                         </label>
-                        <textarea
+                        <input
+                            type="text"
                             name="productInterest"
                             value={formData.productInterest}
                             onChange={handleChange}
                             required
-                            rows="3"
                             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-orange-500 focus:border-orange-500"
-                            placeholder="Which products are you most interested in?"
+                            placeholder="Enter the product you are interested in."
                             disabled={loading}
                         />
                     </div>
@@ -282,7 +285,7 @@ const SupportPage = () => {
                                 ></path>
                             </svg>
                         )}
-                        {loading ? "Sending..." : "Send Message"}
+                        {loading ? "Sending..." : "Submit Inquiry"}
                     </button>
 
                 </form>

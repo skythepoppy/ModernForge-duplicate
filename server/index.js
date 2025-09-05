@@ -93,7 +93,8 @@ app.post('/api/support', async (req, res) => {
 
         const mailOptions = {
             from: `"${name}" <${email}>`,
-            to: process.env.SUPPORT_EMAIL,
+            replyTo:email,
+            to: process.env.SMTP_USER,
             subject: `[Support Form] ${subject}`,
             text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
         };
@@ -101,7 +102,12 @@ app.post('/api/support', async (req, res) => {
         await transporter.sendMail(mailOptions);
         res.status(200).json({ message: 'Email sent successfully' });
     } catch (error) {
-        console.error(error);
+        console.error('Error sending email:', {
+            message: error.message,
+            code: error.code,
+            response: error.response,
+            stack: error.stack
+        });
         res.status(500).json({ message: 'Email could not be sent' });
     }
 });
@@ -143,10 +149,11 @@ app.post('/api/wholesale', async (req, res) => {
             },
         });
 
-        // Construct email content
+        // email content
         const mailOptions = {
             from: `"${contactName}" <${email}>`,
-            to: process.env.SUPPORT_EMAIL, // fallback to SUPPORT_EMAIL
+            replyTo:email,
+            to: process.env.SMTP_USER,
             subject: `[Wholesale Inquiry] ${businessName}`,
             text: `
 Business Name: ${businessName}
@@ -168,7 +175,12 @@ Products of Interest: ${productInterest}
 
         res.status(200).json({ message: 'Wholesale inquiry sent successfully' });
     } catch (error) {
-        console.error('Error sending wholesale email:', error);
+        console.error('Error sending email:', {
+            message: error.message,
+            code: error.code,
+            response: error.response,
+            stack: error.stack
+        });
         res.status(500).json({ message: 'Email could not be sent' });
     }
 });

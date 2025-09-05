@@ -35,7 +35,6 @@ const SupportPage = () => {
                 alert(data.message || 'Something went wrong. Please try again later.');
             }
         } catch (error) {
-            console.error('Error sending support request:', error);
             alert('An error occurred while sending your message.');
         } finally {
             setLoading(false);
