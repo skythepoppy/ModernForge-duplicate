@@ -82,7 +82,7 @@ const HomePage = () => {
                     </a>
 
                     <a
-                        href="/wholesale"
+                        href="/affiliate"
                         target="_self"
                         rel="noopener noreferrer"
                     >

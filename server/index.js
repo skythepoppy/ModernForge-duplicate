@@ -128,7 +128,7 @@ app.post('/api/wholesale', async (req, res) => {
         productInterest
     } = req.body;
 
-    // Basic validation
+    // validation
     if (
         !businessName || !businessType || !contactName || !email || !phone ||
         !website || !shippingAddress || !billingAddress || !taxId ||
@@ -170,7 +170,7 @@ Products of Interest: ${productInterest}
             `,
         };
 
-        // Send email
+        // send email
         await transporter.sendMail(mailOptions);
 
         res.status(200).json({ message: 'Wholesale inquiry sent successfully' });

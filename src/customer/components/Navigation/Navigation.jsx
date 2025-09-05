@@ -2,6 +2,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom';
 import { Gi3dHammer } from "react-icons/gi";
+import { FaSearch } from "react-icons/fa";
 import AlertCarousel from './AlertCarousel';
 
 const navigation = [
@@ -106,9 +107,9 @@ export default function Navigation() {
                   />
                   <button
                     type="submit"
-                    className="text-gray-700 absolute end-2.5 bottom-2.5 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-bold rounded-lg text-sm px-4 py-2"
+                    className="text-gray-300 absolute end-2.5 bottom-2.5 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-bold rounded-lg flex items-center justify-center text-sm px-4 py-2"
                   >
-                    Search
+                    <FaSearch className="text-gray-700 w-4 h-4 " />
                   </button>
                 </div>
               </form>

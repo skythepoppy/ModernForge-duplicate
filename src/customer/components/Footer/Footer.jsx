@@ -22,7 +22,7 @@ const Footer = () => {
                         <Box component="form" sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
                             <TextField
                                 variant="outlined"
-                                placeholder="Sign up now..."
+                                placeholder="you@email.com"
                                 size="small"
                                 sx={{ bgcolor: "#D1D5DB", borderRadius: 1, width: "70%" }}
                             />
@@ -64,7 +64,7 @@ const Footer = () => {
                     <Typography variant='h6' gutterBottom>Quick Links</Typography>
                     <Button color="inherit">About</Button><br />
                     <Button color="inherit" onClick={() => navigate("/wholesale")}>Wholesale</Button><br />
-                    <Button color="inherit">Earn $$$</Button><br />
+                    <Button color="inherit" onClick={() => navigate("/affiliate")}>Earn $$$</Button><br />
                     <Button color="inherit" onClick={() => navigate("/faq")}>FAQs</Button>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
@@ -72,14 +72,14 @@ const Footer = () => {
                     <Button color="inherit" onClick={() => navigate("/support")}>Help Center</Button><br />
                     <Button color="inherit" onClick={() => navigate("/support")}>Contact Us</Button><br />
                     <Button color="inherit" onClick={() => navigate("/shippingreturns")}>Shipping Info</Button><br />
-                    <Button color="inherit">Returns</Button>
+                    <Button color="inherit" onClick={() => navigate("/shippingreturns")}>Returns</Button><br />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Typography variant='h6' gutterBottom>Legal</Typography>
                     <Button color="inherit">Privacy Policy</Button><br />
-                    <Button color="inherit">Return Policy</Button><br />
+                    <Button color="inherit" onClick={() => navigate("/shippingreturns")}>Return Policy</Button><br />
                     <Button color="inherit">Terms & Conditions</Button><br />
-                    <Button color="inherit">Shipping Policies</Button>
+                    <Button color="inherit" onClick={() => navigate("/shippingreturns")}>Shipping Policy</Button><br />
                 </Grid>
             </Grid>
 
