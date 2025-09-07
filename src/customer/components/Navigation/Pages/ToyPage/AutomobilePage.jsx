@@ -122,10 +122,10 @@ const AutomobilePage = () => {
           &gt; <span className="font-semibold">Autmobile Products</span>
         </div>
 
-        <h1 className="text-3xl font-bold mb-6 text-center pb-4">Autmobile Products</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center pb-4">Automobile Products</h1>
 
         {filteredProducts.length === 0 ? (
-          <p>No autmobile products found.</p>
+          <p>No automobile products found.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
             {filteredProducts.map((product, index) => (
