@@ -10,6 +10,7 @@ import AffiliatePage from './customer/components/Navigation/Pages/AffiliatePage/
 import WeeklyDealsPage from './customer/components/Navigation/Pages/WeeklyDeals/WeeklyDealsPage';
 import AircraftPage from './customer/components/Navigation/Pages/ToyPage/AircraftPage';
 import AutomobilePage from './customer/components/Navigation/Pages/ToyPage/AutomobilePage';
+import WatercraftPage from './customer/components/Navigation/Pages/ToyPage/WatercraftPage';
 
 
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/weeklydeals' element = {<WeeklyDealsPage />} />
           <Route path='/aircrafts' element = {<AircraftPage />} />
           <Route path='/autmobiles' element={<AutomobilePage />} />
+          <Route path='/watercrafts' element={<WatercraftPage />} />
         </Routes>
       </Layout>
     </Router>
