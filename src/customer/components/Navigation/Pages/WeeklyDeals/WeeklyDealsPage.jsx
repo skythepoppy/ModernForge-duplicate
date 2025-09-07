@@ -96,7 +96,7 @@ const WeeklyDealsPage = () => {
   return (
     <div className="flex">
       {/* Sidebar Filters */}
-      <aside className="w-1/4 p-4 border-r hidden md:block">
+      <aside className="w-1/5 p-4 border-r hidden md:block">
         <h2 className="text-xl font-bold mb-4">Filters</h2>
 
         {/* Category Filter */}
@@ -107,9 +107,8 @@ const WeeklyDealsPage = () => {
               <li key={label}>
                 <button
                   onClick={() => setCategoryFilter(labelToDbMap[label])}
-                  className={`w-full text-left hover:underline ${
-                    categoryFilter === labelToDbMap[label] && "font-bold"
-                  }`}
+                  className={`w-full text-left hover:underline ${categoryFilter === labelToDbMap[label] && "font-bold"
+                    }`}
                 >
                   {label}
                 </button>
@@ -148,6 +147,12 @@ const WeeklyDealsPage = () => {
             max={Math.max(...products.map((p) => p.discountedPrice || p.price), 100)}
             defaultValue={priceRange}
             onChange={(val) => setPriceRange(val)}
+            trackStyle={[{ backgroundColor: "#f97316" }, { backgroundColor: "#f97316" }]} // one object per track segment
+            railStyle={{ backgroundColor: "#d1d5db" }}    // rail color
+            handleStyle={[
+              { borderColor: "#f97316", backgroundColor: "#f97316" }, // left handle
+              { borderColor: "#f97316", backgroundColor: "#f97316" }  // right handle
+            ]}
           />
           <p className="mt-2">
             ${priceRange[0]} – ${priceRange[1]}
