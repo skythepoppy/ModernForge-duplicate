@@ -11,6 +11,7 @@ import WeeklyDealsPage from './customer/components/Navigation/Pages/WeeklyDeals/
 import AircraftPage from './customer/components/Navigation/Pages/ToyPage/AircraftPage';
 import AutomobilePage from './customer/components/Navigation/Pages/ToyPage/AutomobilePage';
 import WatercraftPage from './customer/components/Navigation/Pages/ToyPage/WatercraftPage';
+import ProgrammablePage from './customer/components/Navigation/Pages/ToyPage/ProgrammablePage';
 
 
 
@@ -30,6 +31,7 @@ function App() {
           <Route path='/aircrafts' element = {<AircraftPage />} />
           <Route path='/autmobiles' element={<AutomobilePage />} />
           <Route path='/watercrafts' element={<WatercraftPage />} />
+          <Route path='/programmables' element={<ProgrammablePage />} />
         </Routes>
       </Layout>
     </Router>
