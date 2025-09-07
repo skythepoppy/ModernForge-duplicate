@@ -301,44 +301,60 @@ app.post('/api/affiliate/:id/status', async (req, res) => {
 });
 
 // --- API route to handle newsletter signups ---
+const rateLimit = {}; // simple in-memory rate limit (IP/email-based)
+
 app.post('/api/newsletter', async (req, res) => {
     const { email } = req.body;
+    const ip = req.ip;
+
     if (!email) return res.status(400).json({ message: "Email is required" });
 
-    // insert into DB
-    const sql = `INSERT INTO newsletter_subs (email) VALUES (?)`;
-    connection.query(sql, [email], async (err, result) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ message: "Failed to save email" });
-        }
+    // --- rate limiter: max 3 requests per 1 minute per IP ---
+    const now = Date.now();
+    rateLimit[ip] = rateLimit[ip] || [];
+    rateLimit[ip] = rateLimit[ip].filter(t => now - t < 60 * 1000);
+    if (rateLimit[ip].length >= 3) {
+        return res.status(429).json({ message: "Too many requests. Please try again later." });
+    }
+    rateLimit[ip].push(now);
 
-        try {
-            // send thank you email
-            const transporter = nodemailer.createTransport({
-                host: process.env.SMTP_HOST,
-                port: Number(process.env.SMTP_PORT),
-                secure: process.env.SMTP_SECURE === 'true',
-                auth: {
-                    user: process.env.SMTP_USER,
-                    pass: process.env.SMTP_PASS,
-                },
-            });
+    // --- duplicate email handling ---
+    connection.query('SELECT * FROM newsletter_subs WHERE email = ?', [email], async (err, results) => {
+        if (err) return res.status(500).json({ message: "Database error" });
+        if (results.length) return res.status(400).json({ message: "Email already subscribed" });
 
-            await transporter.sendMail({
-                from: `"ModernForge Team" <${process.env.SMTP_USER}>`,
-                to: email,
-                subject: `Thanks for subscribing!`,
-                text: `Hi there!\n\nThanks for subscribing to the ModernForge newsletter. You'll receive weekly updates from us.\n\n- ModernForge Team`,
-            });
+        // insert into DB
+        const sql = `INSERT INTO newsletter_subs (email) VALUES (?)`;
+        connection.query(sql, [email], async (err, result) => {
+            if (err) return res.status(500).json({ message: "Failed to save email" });
 
-            res.status(200).json({ message: 'Subscribed successfully' });
-        } catch (error) {
-            console.error('Email error:', error);
-            res.status(500).json({ message: 'Saved, but failed to send email' });
-        }
+            try {
+                const transporter = nodemailer.createTransport({
+                    host: process.env.SMTP_HOST,
+                    port: Number(process.env.SMTP_PORT),
+                    secure: process.env.SMTP_SECURE === 'true',
+                    auth: {
+                        user: process.env.SMTP_USER,
+                        pass: process.env.SMTP_PASS,
+                    },
+                });
+
+                await transporter.sendMail({
+                    from: `"ModernForge Team" <${process.env.SMTP_USER}>`,
+                    to: email,
+                    subject: `Thanks for subscribing!`,
+                    text: `Hi there!\n\nThanks for subscribing to the ModernForge newsletter. You'll receive weekly updates from us.\n\n- ModernForge Team`,
+                });
+
+                res.status(200).json({ message: 'Subscribed successfully' });
+            } catch (error) {
+                console.error('Email error:', error);
+                res.status(500).json({ message: 'Saved, but failed to send email' });
+            }
+        });
     });
 });
+
 
 
 
