@@ -8,6 +8,18 @@ export default function ProductPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // DB column mapping
+    const categoryMap = {
+        airplane: "Aircrafts",
+        ship: "Watercrafts",
+        automobile: "Automobiles",
+        programmable: "Programmables",
+    };
+    const statusMap = {
+        active: "Active",
+        new_release: "New Release",
+    };
+
     useEffect(() => {
         async function fetchProduct() {
             try {
@@ -98,20 +110,34 @@ export default function ProductPage() {
 
                 <p className="mt-4 text-gray-700">{product.description}</p>
                 <p className="mt-2 text-gray-500">Brand: {product.brand}</p>
-                <p className="mt-1 text-gray-500">Category: {product.category}</p>
-                {product.status && <p className="mt-1 text-gray-500">Status: {product.status}</p>}
+                <p className="mt-1 text-gray-500">
+                    Category: {categoryMap[product.category] || product.category}
+                </p>
+                {product.status && (
+                    <p className="mt-1 text-gray-500">
+                        Status: {statusMap[product.status] || product.status}
+                    </p>
+                )}
 
                 {/* Buttons */}
                 <div className="flex gap-4 mt-6">
                     <Button
                         variant="contained"
                         onClick={handleAddToCart}
-                        sx={{ bgcolor: "#F97316", color: "white", "&:hover": { bgcolor: "#EA580C" } }}
+                        sx={{
+                            bgcolor: "#F97316",
+                            color: "white",
+                            "&:hover": { bgcolor: "#EA580C" },
+                        }}
                     >
                         Add to Cart
                     </Button>
 
-                    <Button variant="contained" color="secondary" onClick={handleBuyNow}>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleBuyNow}
+                    >
                         Buy Now
                     </Button>
                 </div>
