@@ -12,6 +12,7 @@ import AircraftPage from './customer/components/Navigation/Pages/ToyPage/Aircraf
 import AutomobilePage from './customer/components/Navigation/Pages/ToyPage/AutomobilePage';
 import WatercraftPage from './customer/components/Navigation/Pages/ToyPage/WatercraftPage';
 import ProgrammablePage from './customer/components/Navigation/Pages/ToyPage/ProgrammablePage';
+import ProductPage from './customer/ProductPage/ProductPage';
 
 
 
@@ -24,14 +25,15 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/support" element={<SupportPage />} />
-          <Route path="/shippingreturns" element ={<ShippingReturnsPage />} />
-          <Route path="/wholesale" element ={<WholesalePage />} />
+          <Route path="/shippingreturns" element={<ShippingReturnsPage />} />
+          <Route path="/wholesale" element={<WholesalePage />} />
           <Route path='/affiliate' element={<AffiliatePage />} />
-          <Route path='/weeklydeals' element = {<WeeklyDealsPage />} />
-          <Route path='/aircrafts' element = {<AircraftPage />} />
+          <Route path='/weeklydeals' element={<WeeklyDealsPage />} />
+          <Route path='/aircrafts' element={<AircraftPage />} />
           <Route path='/autmobiles' element={<AutomobilePage />} />
           <Route path='/watercrafts' element={<WatercraftPage />} />
           <Route path='/programmables' element={<ProgrammablePage />} />
+          <Route path='/products/:productID' element={<ProductPage />} />
         </Routes>
       </Layout>
     </Router>
