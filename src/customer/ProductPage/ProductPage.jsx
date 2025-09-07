@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Button } from '@mui/material';
-
-
+import { Button } from "@mui/material";
 
 export default function ProductPage() {
     const { productId } = useParams();
@@ -16,8 +14,9 @@ export default function ProductPage() {
                 const response = await fetch("http://localhost:5050/api/toys");
                 const data = await response.json();
 
-                // Find the product with matching ID
-                const selectedProduct = data.find((item) => item.id.toString() === productId);
+                const selectedProduct = data.find(
+                    (item) => item.id.toString() === productId
+                );
 
                 setProduct(selectedProduct);
             } catch (error) {
@@ -31,14 +30,12 @@ export default function ProductPage() {
         fetchProduct();
     }, [productId]);
 
-    // Loading & Error states
     if (loading) return <p className="p-6">Loading product...</p>;
     if (error) return <p className="p-6 text-red-500">Error: {error}</p>;
     if (!product) return <p className="p-6">Product not found</p>;
 
-    const displayPrice = product.discountedPrice || product.price;
+    const { price, discountedPrice } = product;
 
-    // Handlers for cart & buy now
     const handleAddToCart = async () => {
         try {
             const res = await fetch(`/api/cart`, {
@@ -86,9 +83,19 @@ export default function ProductPage() {
             {/* Product Info */}
             <div>
                 <h1 className="text-3xl font-bold">{product.item}</h1>
-                <p className="text-xl font-semibold text-gray-900 mt-2">
-                    ${displayPrice}
-                </p>
+
+                {/* Price with optional discount slash */}
+                {discountedPrice ? (
+                    <p className="text-xl font-semibold text-gray-900 mt-2">
+                        <span className="line-through mr-2">${price.toFixed(2)}</span>
+                        <span className="text-orange-500">${discountedPrice.toFixed(2)}</span>
+                    </p>
+                ) : (
+                    <p className="text-xl font-semibold text-gray-900 mt-2">
+                        ${price.toFixed(2)}
+                    </p>
+                )}
+
                 <p className="mt-4 text-gray-700">{product.description}</p>
                 <p className="mt-2 text-gray-500">Brand: {product.brand}</p>
                 <p className="mt-1 text-gray-500">Category: {product.category}</p>
@@ -96,8 +103,15 @@ export default function ProductPage() {
 
                 {/* Buttons */}
                 <div className="flex gap-4 mt-6">
-                    <Button onClick={handleAddToCart}>Add to Cart</Button>
-                    <Button variant="secondary" onClick={handleBuyNow}>
+                    <Button
+                        variant="contained"
+                        onClick={handleAddToCart}
+                        sx={{ bgcolor: "#F97316", color: "white", "&:hover": { bgcolor: "#EA580C" } }}
+                    >
+                        Add to Cart
+                    </Button>
+
+                    <Button variant="contained" color="secondary" onClick={handleBuyNow}>
                         Buy Now
                     </Button>
                 </div>
