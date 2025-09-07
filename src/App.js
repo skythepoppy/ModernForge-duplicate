@@ -8,6 +8,7 @@ import ShippingReturnsPage from './customer/components/Navigation/Pages/Shipping
 import WholesalePage from './customer/components/Navigation/Pages/WholesalePage/WholesalePage';
 import AffiliatePage from './customer/components/Navigation/Pages/AffiliatePage/AffiliatePage';
 import WeeklyDealsPage from './customer/components/Navigation/Pages/WeeklyDeals/WeeklyDealsPage';
+import AircraftPage from './customer/components/Navigation/Pages/ToyPage/AircraftPage';
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/wholesale" element ={<WholesalePage />} />
           <Route path='/affiliate' element={<AffiliatePage />} />
           <Route path='/weeklydeals' element = {<WeeklyDealsPage />} />
+          <Route path='/aircrafts' element = {<AircraftPage />} />
         </Routes>
       </Layout>
     </Router>
