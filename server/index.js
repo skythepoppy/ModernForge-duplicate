@@ -249,56 +249,97 @@ Status: pending
 
 // -- API route for admins to update status and user auto-notification --
 app.post('/api/affiliate/:id/status', async (req, res) => {
-    const {id} = req.params;
-    const {status} = req.body;
+    const { id } = req.params;
+    const { status } = req.body;
 
-    if(!['accepted', 'rejected'].includes(status)){
-        return res.status(400).json({message: 'Invalid status'});
+    if (!['accepted', 'rejected'].includes(status)) {
+        return res.status(400).json({ message: 'Invalid status' });
     }
 
     // update DB
     const sql = `UPDATE affiliate_applications SET status = ? WHERE id = ?`;
     connection.query(sql, [status, id], async (err, result) => {
-        if(err ||result.affectedRows === 0){
-                return res.status(500).json({message: "Failed to update status"});
-            };
+        if (err || result.affectedRows === 0) {
+            return res.status(500).json({ message: "Failed to update status" });
+        };
 
         // get user email for notification
         const getEmailSql = `SELECT email, name FROM affiliate_applications WHERE id = ?`;
-        connection.query(getEmailSql, [id], async (err, rows) =>{
-            if(err || !rows.length){
-                return res.status(500).json({message: "User not found"});
+        connection.query(getEmailSql, [id], async (err, rows) => {
+            if (err || !rows.length) {
+                return res.status(500).json({ message: "User not found" });
             };
 
-            const {email, name} = rows[0];
+            const { email, name } = rows[0];
 
             console.log('Sending email to:', email, 'Name:', name); //TEST
 
 
-            try{
+            try {
                 const transporter = nodemailer.createTransport({
                     host: process.env.SMTP_HOST,
                     port: Number(process.env.SMTP_PORT),
                     secure: process.env.SMTP_SECURE === 'true',
-                    auth: {user: process.env.SMTP_USER, pass: process.env.SMTP_PASS},
+                    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
                 });
 
                 await transporter.sendMail({
                     from: `"ModernForge Team" <${process.env.SMTP_USER}>`,
-                    to: String(email), 
-                    subject: `Your Affiliate Application Status: ${status}`, 
+                    to: String(email),
+                    subject: `Your Affiliate Application Status: ${status}`,
                     text: `Hi ${name}, \n\nYour affiliate application has been ${status}.\n\nThank you for applying!\n- ModernForge Team`,
                 });
-                
-                res.status(200).json({message: `Status updated to ${status} and notified.`});
-            } catch (error){
+
+                res.status(200).json({ message: `Status updated to ${status} and notified.` });
+            } catch (error) {
                 console.error('Email error:', error);
-                res.status(500).json({message: 'Status updated but failed to send email'});
+                res.status(500).json({ message: 'Status updated but failed to send email' });
             }
 
         });
     });
 });
+
+// --- API route to handle newsletter signups ---
+app.post('/api/newsletter', async (req, res) => {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ message: "Email is required" });
+
+    // insert into DB
+    const sql = `INSERT INTO newsletter_subs (email) VALUES (?)`;
+    connection.query(sql, [email], async (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Failed to save email" });
+        }
+
+        try {
+            // send thank you email
+            const transporter = nodemailer.createTransport({
+                host: process.env.SMTP_HOST,
+                port: Number(process.env.SMTP_PORT),
+                secure: process.env.SMTP_SECURE === 'true',
+                auth: {
+                    user: process.env.SMTP_USER,
+                    pass: process.env.SMTP_PASS,
+                },
+            });
+
+            await transporter.sendMail({
+                from: `"ModernForge Team" <${process.env.SMTP_USER}>`,
+                to: email,
+                subject: `Thanks for subscribing!`,
+                text: `Hi there!\n\nThanks for subscribing to the ModernForge newsletter. You'll receive weekly updates from us.\n\n- ModernForge Team`,
+            });
+
+            res.status(200).json({ message: 'Subscribed successfully' });
+        } catch (error) {
+            console.error('Email error:', error);
+            res.status(500).json({ message: 'Saved, but failed to send email' });
+        }
+    });
+});
+
 
 
 // --- Start server ---
