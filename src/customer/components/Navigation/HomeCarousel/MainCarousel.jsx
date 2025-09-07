@@ -7,7 +7,7 @@ const MainCarousel = () => {
     const items = MainCarouselData.map((item) => (
         <img 
             key={item.id}
-            className="cursor-pointer w-full h-[60vh] rounded-2xl object-cover"
+            className="cursor-pointer w-full h-[60vh] rounded-2xl object-cover z-40"
             role="presentation"
             src={item.imageUrl}
             alt={item.title} 
@@ -15,7 +15,7 @@ const MainCarousel = () => {
     ));
 
     return (
-        <div className="w-full max-w-[1200px] mx-auto p-5 overflow-hidden ">
+        <div className="w-full max-w-[1200px] mx-auto p-5 z-40">
             <AliceCarousel
                 animationType="fadeout"
                 animationDuration={800}

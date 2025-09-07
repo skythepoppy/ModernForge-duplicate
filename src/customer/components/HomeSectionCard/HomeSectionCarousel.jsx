@@ -66,7 +66,7 @@ const HomeSectionCarousel = ({ category, status, limit = 5, autoPlay = false, sh
         mouseTracking
         items={items}
         autoPlay={autoPlay}
-        autoPlayInterval={3000}
+        autoPlayInterval={2000}
         infinite={true}
         disableDotsControls={true}
         disableButtonsControls={true}
