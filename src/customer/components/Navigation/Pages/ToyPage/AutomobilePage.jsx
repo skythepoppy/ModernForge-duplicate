@@ -5,36 +5,36 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-const AircraftPage = () => {
+const AutomobilePage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [brandFilter, setBrandFilter] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 100]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  // Fetch aircraft products
+  // Fetch autmobile products
   useEffect(() => {
-    async function fetchAircrafts() {
+    async function fetchAutmobiles() {
       try {
         const response = await fetch("http://localhost:5050/api/toys");
         const data = await response.json();
 
-        const aircrafts = data.filter((item) => item.category === "airplane");
-        setProducts(aircrafts);
+        const automobiles = data.filter((item) => item.category === "automobile");
+        setProducts(automobiles);
 
         // Initialize price slider range based on aircraft prices
-        if (aircrafts.length > 0) {
-          const prices = aircrafts.map((p) => p.discountedPrice || p.price);
+        if (automobiles.length > 0) {
+          const prices = automobiles.map((p) => p.discountedPrice || p.price);
           setPriceRange([Math.min(...prices), Math.max(...prices)]);
         }
       } catch (error) {
-        console.error("Error fetching aircraft products:", error);
+        console.error("Error fetching automobile products:", error);
       } finally {
         setLoading(false);
       }
     }
 
-    fetchAircrafts();
+    fetchAutmobiles();
   }, []);
 
   // Get unique brands for filter checkboxes
@@ -48,7 +48,7 @@ const AircraftPage = () => {
     return inPriceRange && inBrand;
   });
 
-  if (loading) return <p className="text-center">Loading aircraft products...</p>;
+  if (loading) return <p className="text-center">Loading autmobile products...</p>;
 
   return (
     <div className="flex">
@@ -119,13 +119,13 @@ const AircraftPage = () => {
           <Link to="/" className="hover:underline">
             Home
           </Link>{" "}
-          &gt; <span className="font-semibold">Aircraft Products</span>
+          &gt; <span className="font-semibold">Autmobile Products</span>
         </div>
 
-        <h1 className="text-3xl font-bold mb-6 text-center pb-4">Aircraft Products</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center pb-4">Autmobile Products</h1>
 
         {filteredProducts.length === 0 ? (
-          <p>No aircraft products found.</p>
+          <p>No autmobile products found.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
             {filteredProducts.map((product, index) => (
@@ -145,4 +145,4 @@ const AircraftPage = () => {
   );
 };
 
-export default AircraftPage;
+export default AutomobilePage;
