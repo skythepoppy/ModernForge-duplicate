@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 
 
 export default function ProductPage() {
-    const { productId } = useParams();         
+    const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -77,7 +77,7 @@ export default function ProductPage() {
             {/* Product Image */}
             <div className="rounded-2xl overflow-hidden shadow-lg">
                 <img
-                    src={product.image}
+                    src={product.imageUrl}
                     alt={product.item}
                     className="w-full h-full object-cover"
                 />

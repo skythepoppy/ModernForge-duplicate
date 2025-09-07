@@ -33,7 +33,7 @@ function App() {
           <Route path='/autmobiles' element={<AutomobilePage />} />
           <Route path='/watercrafts' element={<WatercraftPage />} />
           <Route path='/programmables' element={<ProgrammablePage />} />
-          <Route path='/products/:productID' element={<ProductPage />} />
+          <Route path='/products/:productId' element={<ProductPage />} />
         </Routes>
       </Layout>
     </Router>

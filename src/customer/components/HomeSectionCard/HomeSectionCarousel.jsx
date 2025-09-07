@@ -26,6 +26,7 @@ const HomeSectionCarousel = ({ category, status, limit = 5, autoPlay = false, sh
 
         const mappedData = data
           .map(item => ({
+            id: item.id,
             imageSrc: item.imageUrl,
             brand: item.brand,
             title: item.item,
@@ -45,9 +46,10 @@ const HomeSectionCarousel = ({ category, status, limit = 5, autoPlay = false, sh
     fetchData();
   }, [category, status, limit]);
 
-  const items = cardData.map((card, index) => (
+  const items = cardData.map((card) => (
     <HomeSectionCard
-      key={index}
+      key={card.id}
+      id={card.id}
       imageSrc={card.imageSrc}
       brand={card.brand}
       title={card.title}

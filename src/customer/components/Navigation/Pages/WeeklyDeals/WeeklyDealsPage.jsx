@@ -185,9 +185,10 @@ const WeeklyDealsPage = () => {
           <p>No discounted products found.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-            {filteredProducts.map((product, index) => (
+            {filteredProducts.map((product) => (
               <HomeSectionCard
-                key={index}
+                key={product.id}
+                id={product.id}
                 imageSrc={product.imageUrl}
                 brand={product.brand}
                 title={product.item}
