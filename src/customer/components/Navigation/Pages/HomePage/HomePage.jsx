@@ -27,7 +27,7 @@ const HomePage = () => {
                 <button
                     type="button"
                     className="-mt-2  text-black-500 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-500 font-bold rounded-lg text-sm px-6 py-2"
-                    onClick={() => navigate("/autmobiles")}
+                    onClick={() => navigate("/automobiles")}
                 >
                     Shop All Automobiles
                 </button>

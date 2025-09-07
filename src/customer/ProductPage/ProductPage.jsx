@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 
 export default function ProductPage() {
+    const navigate = useNavigate();
     const { productId } = useParams();
+    const location = useLocation();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -25,15 +27,11 @@ export default function ProductPage() {
             try {
                 const response = await fetch("http://localhost:5050/api/toys");
                 const data = await response.json();
-
-                const selectedProduct = data.find(
-                    (item) => item.id.toString() === productId
-                );
-
+                const selectedProduct = data.find((item) => item.id.toString() === productId);
                 setProduct(selectedProduct);
-            } catch (error) {
-                console.error("Error fetching product:", error);
-                setError(error.message);
+            } catch (err) {
+                console.error("Error fetching product:", err);
+                setError(err.message);
             } finally {
                 setLoading(false);
             }
@@ -68,9 +66,7 @@ export default function ProductPage() {
             const res = await fetch(`/api/orders`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    items: [{ productId: product.id, quantity: 1 }],
-                }),
+                body: JSON.stringify({ items: [{ productId: product.id, quantity: 1 }] }),
             });
             if (!res.ok) throw new Error("Failed to create order");
             const order = await res.json();
@@ -81,8 +77,43 @@ export default function ProductPage() {
         }
     };
 
+    // Dynamic breadcrumb using location.state
+    const { previousPageLabel, previousPagePath } = location.state || {};
+
+
+
     return (
         <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-10">
+            {/* Breadcrumb */}
+            <div className="text-gray-500 text-sm mb-4">
+                <span
+                    className="cursor-pointer hover:underline"
+                    onClick={() => navigate("/")}
+                >
+                    Home
+                </span>
+
+                {previousPageLabel && previousPagePath ? (
+                    <>
+                        {" > "}
+                        <span
+                            className="cursor-pointer hover:underline"
+                            onClick={() => navigate(previousPagePath)}
+                        >
+                            {previousPageLabel}
+                        </span>
+                        {" > "}
+                    </>
+                ) : (
+                    " > "
+                )}
+
+                <span>{product.item}</span>
+            </div>
+
+
+
+
             {/* Product Image */}
             <div className="rounded-2xl overflow-hidden shadow-lg">
                 <img
@@ -96,7 +127,6 @@ export default function ProductPage() {
             <div>
                 <h1 className="text-3xl font-bold">{product.item}</h1>
 
-                {/* Price with optional discount slash */}
                 {discountedPrice ? (
                     <p className="text-xl font-semibold text-gray-900 mt-2">
                         <span className="line-through mr-2">${price.toFixed(2)}</span>
@@ -119,16 +149,11 @@ export default function ProductPage() {
                     </p>
                 )}
 
-                {/* Buttons */}
                 <div className="flex gap-4 mt-6">
                     <Button
                         variant="contained"
                         onClick={handleAddToCart}
-                        sx={{
-                            bgcolor: "#F97316",
-                            color: "white",
-                            "&:hover": { bgcolor: "#EA580C" },
-                        }}
+                        sx={{ bgcolor: "#F97316", color: "white", "&:hover": { bgcolor: "#EA580C" } }}
                     >
                         Add to Cart
                     </Button>
@@ -142,7 +167,6 @@ export default function ProductPage() {
                     </Button>
                 </div>
 
-                {/* Reviews Section */}
                 <div className="mt-10">
                     <h2 className="text-2xl font-semibold mb-3">Customer Reviews</h2>
                     <p className="text-gray-500">Reviews coming soon...</p>

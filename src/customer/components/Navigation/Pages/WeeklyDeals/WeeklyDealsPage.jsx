@@ -92,8 +92,6 @@ const WeeklyDealsPage = () => {
         className={`bg-white border-r transition-all duration-300 relative
           ${isSidebarOpen ? "w-64 p-4" : "w-12 p-2"}`}
       >
-
-        {/* Toggle icon for desktop */}
         <button
           className="absolute top-1/2 right-[-16px] transform -translate-y-1/2 bg-orange-500 text-white p-2 rounded-full shadow-md hidden md:flex items-center justify-center"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -103,7 +101,6 @@ const WeeklyDealsPage = () => {
 
         {isSidebarOpen && (
           <>
-
             {/* Category Filter */}
             <div className="mb-6">
               <h3 className="font-semibold mb-2">Category</h3>
@@ -165,9 +162,6 @@ const WeeklyDealsPage = () => {
             </div>
           </>
         )}
-        {!isSidebarOpen && (
-          <div className="flex flex-col items-center justify-center h-full text-gray-500 text-xs" />
-        )}
       </aside>
 
       {/* Product Grid */}
@@ -194,6 +188,7 @@ const WeeklyDealsPage = () => {
                 title={product.item}
                 price={product.price}
                 discountedPrice={product.discountedPrice}
+                linkState={{ previousPageLabel: "Weekly Deals", previousPagePath: "/weeklydeals" }}
               />
             ))}
           </div>

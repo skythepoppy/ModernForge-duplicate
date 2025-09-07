@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const HomeSectionCard = ({ id, imageSrc, title, brand, price, discountedPrice }) => {
+const HomeSectionCard = ({ id, imageSrc, title, brand, price, discountedPrice, linkState }) => {
   return (
-    <Link to={`/products/${id}`} className="cursor-pointer">
+    <Link to={`/products/${id}`} className="cursor-pointer" state={linkState}>
       <div className="flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden w-[15rem] mx-3 h-auto">
         <div className="h-[13rem] w-[10rem]">
           <img src={imageSrc} alt={title} className="w-full h-full object-cover rounded-lg" />

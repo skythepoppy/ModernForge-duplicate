@@ -137,6 +137,7 @@ const ProgrammablePage = () => {
                 title={product.item}
                 price={product.price}
                 discountedPrice={product.discountedPrice}
+                linkState={{ previousPageLabel: "Programmable Products", previousPagePath: "/programmables" }}
               />
             ))}
           </div>

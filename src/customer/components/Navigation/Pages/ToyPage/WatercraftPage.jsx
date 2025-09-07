@@ -137,6 +137,7 @@ const WatercraftPage = () => {
                 title={product.item}
                 price={product.price}
                 discountedPrice={product.discountedPrice}
+                linkState={{ previousPageLabel: "Watercraft Products", previousPagePath: "/watercrafts" }}
               />
             ))}
           </div>

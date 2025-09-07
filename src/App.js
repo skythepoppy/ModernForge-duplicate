@@ -30,7 +30,7 @@ function App() {
           <Route path='/affiliate' element={<AffiliatePage />} />
           <Route path='/weeklydeals' element={<WeeklyDealsPage />} />
           <Route path='/aircrafts' element={<AircraftPage />} />
-          <Route path='/autmobiles' element={<AutomobilePage />} />
+          <Route path='/automobiles' element={<AutomobilePage />} />
           <Route path='/watercrafts' element={<WatercraftPage />} />
           <Route path='/programmables' element={<ProgrammablePage />} />
           <Route path='/products/:productId' element={<ProductPage />} />

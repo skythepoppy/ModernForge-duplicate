@@ -137,6 +137,7 @@ const AircraftPage = () => {
                 title={product.item}
                 price={product.price}
                 discountedPrice={product.discountedPrice}
+                linkState={{ previousPageLabel: "Aircraft Products", previousPagePath: "/weeklydeals" }}
               />
             ))}
           </div>

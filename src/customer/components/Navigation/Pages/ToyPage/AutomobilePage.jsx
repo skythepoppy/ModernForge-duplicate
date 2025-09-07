@@ -137,6 +137,7 @@ const AutomobilePage = () => {
                 title={product.item}
                 price={product.price}
                 discountedPrice={product.discountedPrice}
+                linkState={{ previousPageLabel: "Automobile Products", previousPagePath: "/automobiles" }}
               />
             ))}
           </div>
