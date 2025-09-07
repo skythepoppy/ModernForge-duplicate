@@ -3,6 +3,16 @@ import HomeSectionCard from "../../../HomeSectionCard/HomeSectionCard";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
+// category mapping for filter
+const categoryMap = {
+  All: null,
+  Aircrafts: "airplane",
+  Watercrafts: "ship",
+  Automobiles: "automobile",
+  Programmables: "programmable",
+};
+
+
 const WeeklyDealsPage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,7 +50,7 @@ const WeeklyDealsPage = () => {
   // Filter products
   const filteredProducts = products.filter((p) => {
     const inCategory =
-      categoryFilter === "All" || p.category === categoryFilter;
+      !categoryFilter || p.category === categoryFilter;
 
     const inBrand =
       brandFilter.length === 0 || brandFilter.includes(p.brand);
@@ -66,12 +76,12 @@ const WeeklyDealsPage = () => {
         <div className="mb-6">
           <h3 className="font-semibold mb-2">Category</h3>
           <ul className="space-y-2">
-            {["All", "Beyblades", "Accessories", "Collectibles"].map((cat) => (
+            {Object.keys(categoryMap).map((cat) => (
               <li key={cat}>
                 <button
-                  onClick={() => setCategoryFilter(cat)}
+                  onClick={() => setCategoryFilter(categoryMap[cat])}
                   className={`w-full text-left hover:underline ${
-                    categoryFilter === cat && "font-bold"
+                    categoryFilter === categoryMap[cat] && "font-bold"
                   }`}
                 >
                   {cat}
