@@ -18,7 +18,7 @@ export default function ProductPage() {
         programmable: "Programmables",
     };
     const statusMap = {
-        active: "Active",
+        active: "In Stock",
         new_release: "New Release",
     };
 
