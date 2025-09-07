@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
       <Navigation />
 
       {/* Main content */}
-      <main className="flex-grow">{children}</main>
+      <main className="flex-grow w-full overflow-x-hidden">{children}</main>
 
       {/* Footer always at bottom */}
       <Footer />
