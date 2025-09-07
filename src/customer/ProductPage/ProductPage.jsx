@@ -83,9 +83,9 @@ export default function ProductPage() {
 
 
     return (
-        <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="max-w-6xl mx-auto p-6">
             {/* Breadcrumb */}
-            <div className="text-gray-500 text-sm mb-4">
+            <div className="text-gray-500 text-sm mb-6 flex justify-center pb-8">
                 <span
                     className="cursor-pointer hover:underline"
                     onClick={() => navigate("/")}
@@ -108,70 +108,71 @@ export default function ProductPage() {
                     " > "
                 )}
 
-                <span>{product.item}</span>
+                <span className="font-bold">{product.item}</span>
             </div>
 
 
 
-
-            {/* Product Image */}
-            <div className="rounded-2xl overflow-hidden shadow-lg">
-                <img
-                    src={product.imageUrl}
-                    alt={product.item}
-                    className="w-full h-full object-cover"
-                />
-            </div>
-
-            {/* Product Info */}
-            <div>
-                <h1 className="text-3xl font-bold">{product.item}</h1>
-
-                {discountedPrice ? (
-                    <p className="text-xl font-semibold text-gray-900 mt-2">
-                        <span className="line-through mr-2">${price.toFixed(2)}</span>
-                        <span className="text-orange-500">${discountedPrice.toFixed(2)}</span>
-                    </p>
-                ) : (
-                    <p className="text-xl font-semibold text-gray-900 mt-2">
-                        ${price.toFixed(2)}
-                    </p>
-                )}
-
-                <p className="mt-4 text-gray-700">{product.description}</p>
-                <p className="mt-2 text-gray-500">Brand: {product.brand}</p>
-                <p className="mt-1 text-gray-500">
-                    Category: {categoryMap[product.category] || product.category}
-                </p>
-                {product.status && (
-                    <p className="mt-1 text-gray-500">
-                        Status: {statusMap[product.status] || product.status}
-                    </p>
-                )}
-
-                <div className="flex gap-4 mt-6">
-                    <Button
-                        variant="contained"
-                        onClick={handleAddToCart}
-                        sx={{ bgcolor: "#F97316", color: "white", "&:hover": { bgcolor: "#EA580C" } }}
-                    >
-                        Add to Cart
-                    </Button>
-
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleBuyNow}
-                    >
-                        Buy Now
-                    </Button>
+            {/* Grid for product image + info */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {/* Product Image */}
+                <div className="rounded-2xl overflow-hidden shadow-lg">
+                    <img
+                        src={product.imageUrl}
+                        alt={product.item}
+                        className="w-full h-full object-cover"
+                    />
                 </div>
 
-                <div className="mt-10">
-                    <h2 className="text-2xl font-semibold mb-3">Customer Reviews</h2>
-                    <p className="text-gray-500">Reviews coming soon...</p>
+                {/* Product Info */}
+                <div>
+                    <h1 className="text-3xl font-bold">{product.item}</h1>
+                    {discountedPrice ? (
+                        <p className="text-xl font-semibold text-gray-900 mt-2">
+                            <span className="line-through mr-2">${price.toFixed(2)}</span>
+                            <span className="text-orange-500">${discountedPrice.toFixed(2)}</span>
+                        </p>
+                    ) : (
+                        <p className="text-xl font-semibold text-gray-900 mt-2">
+                            ${price.toFixed(2)}
+                        </p>
+                    )}
+                    <p className="mt-4 text-gray-700">{product.description}</p>
+                    <p className="mt-2 text-gray-500">Brand: {product.brand}</p>
+                    <p className="mt-1 text-gray-500">
+                        Category: {categoryMap[product.category] || product.category}
+                    </p>
+                    {product.status && (
+                        <p className="mt-1 text-gray-500">
+                            Status: {statusMap[product.status] || product.status}
+                        </p>
+                    )}
+
+                    <div className="flex gap-4 mt-6">
+                        <Button
+                            variant="contained"
+                            onClick={handleAddToCart}
+                            sx={{ bgcolor: "#F97316", color: "white", "&:hover": { bgcolor: "#EA580C" } }}
+                        >
+                            Add to Cart
+                        </Button>
+
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleBuyNow}
+                        >
+                            Buy Now
+                        </Button>
+                    </div>
+
+                    <div className="mt-10">
+                        <h2 className="text-2xl font-semibold mb-3">Customer Reviews</h2>
+                        <p className="text-gray-500">Reviews coming soon...</p>
+                    </div>
                 </div>
             </div>
         </div>
     );
+
 }
