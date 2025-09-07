@@ -24,7 +24,6 @@ const HomeSectionCarousel = ({ category, status, limit = 5, autoPlay = false, sh
         const response = await fetch(url);
         const data = await response.json();
 
-
         const mappedData = data
           .map(item => ({
             imageSrc: item.imageUrl,
@@ -75,7 +74,7 @@ const HomeSectionCarousel = ({ category, status, limit = 5, autoPlay = false, sh
         autoHeight
       />
 
-      {/* Custom Arrows */}
+      {/* Arrows */}
       {showArrows && (
         <>
           <button
