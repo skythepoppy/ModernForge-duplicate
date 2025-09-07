@@ -23,7 +23,7 @@ import AlertCarousel from "./AlertCarousel";
 const navigation = [
   { name: "Earn $$$", href: "/affiliate", current: false },
   { name: "Happy Customers", href: "#", current: false },
-  { name: "Newsletter", href: "#", current: false },
+  { name: "Newsletter", href: "/newsletter", current: false },
   { name: "Wholesale", href: "/wholesale", current: false },
 ];
 

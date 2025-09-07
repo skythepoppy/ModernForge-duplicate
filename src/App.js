@@ -13,6 +13,7 @@ import AutomobilePage from './customer/components/Navigation/Pages/ToyPage/Autom
 import WatercraftPage from './customer/components/Navigation/Pages/ToyPage/WatercraftPage';
 import ProgrammablePage from './customer/components/Navigation/Pages/ToyPage/ProgrammablePage';
 import ProductPage from './customer/ProductPage/ProductPage';
+import NewsletterPage from './customer/components/Navigation/Pages/NewsLetterPage/NewsletterPage';
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path='/watercrafts' element={<WatercraftPage />} />
           <Route path='/programmables' element={<ProgrammablePage />} />
           <Route path='/products/:productId' element={<ProductPage />} />
+          <Route path='/newsletter' element={<NewsletterPage />} />
         </Routes>
       </Layout>
     </Router>

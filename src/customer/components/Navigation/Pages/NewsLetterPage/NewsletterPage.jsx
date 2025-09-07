@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function NewsletterForm() {
+export default function NewsletterPage() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");
 
