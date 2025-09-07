@@ -3,8 +3,16 @@ import HomeSectionCard from "../../../HomeSectionCard/HomeSectionCard";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-// category mapping for filter
-const categoryMap = {
+// mapping DB categories '
+const dbToLabelMap = {
+  airplane: "Aircrafts",
+  ship: "Watercrafts",
+  automobile: "Automobiles",
+  programmable: "Programmables",
+};
+
+// reverse map for filter clicks
+const labelToDbMap = {
   All: null,
   Aircrafts: "airplane",
   Watercrafts: "ship",
@@ -12,13 +20,23 @@ const categoryMap = {
   Programmables: "programmable",
 };
 
+// deterministic shuffle based on a seed
+function seededShuffle(array, seed) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    seed = (seed * 9301 + 49297) % 233280;
+    const j = Math.floor((seed / 233280) * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
 const WeeklyDealsPage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [categoryFilter, setCategoryFilter] = useState("All");
+  const [categoryFilter, setCategoryFilter] = useState(null);
   const [brandFilter, setBrandFilter] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 100]); 
+  const [priceRange, setPriceRange] = useState([0, 100]);
 
   useEffect(() => {
     async function fetchDeals() {
@@ -26,17 +44,23 @@ const WeeklyDealsPage = () => {
         const response = await fetch("http://localhost:5050/api/toys");
         const data = await response.json();
 
-        // only toys that have a discountedPrice
+        // only products with discountedPrice
         const discounted = data.filter((item) => item.discountedPrice);
 
-        setProducts(discounted);
+        // calculate 3-day period index
+        const now = new Date();
+        const daysSinceEpoch = Math.floor(now.getTime() / (1000 * 60 * 60 * 24));
+        const periodIndex = Math.floor(daysSinceEpoch / 3);
+
+        // shuffle deterministically and pick 8 products
+        const weeklyDeals = seededShuffle(discounted, periodIndex).slice(0, 8);
+        setProducts(weeklyDeals);
 
         // dynamically set price range
-        const prices = discounted.map((p) => p.discountedPrice || p.price);
+        const prices = weeklyDeals.map((p) => p.discountedPrice || p.price);
         if (prices.length > 0) {
           setPriceRange([Math.min(...prices), Math.max(...prices)]);
         }
-
       } catch (error) {
         console.error("Error fetching deals:", error);
       } finally {
@@ -47,22 +71,25 @@ const WeeklyDealsPage = () => {
     fetchDeals();
   }, []);
 
-  // Filter products
+  // reset to all products on page load
+  useEffect(() => {
+    setCategoryFilter(null);
+  }, []);
+
+  // filter
   const filteredProducts = products.filter((p) => {
-    const inCategory =
-      !categoryFilter || p.category === categoryFilter;
-
-    const inBrand =
-      brandFilter.length === 0 || brandFilter.includes(p.brand);
-
+    const inCategory = !categoryFilter || p.category === categoryFilter;
+    const inBrand = brandFilter.length === 0 || brandFilter.includes(p.brand);
     const price = p.discountedPrice || p.price;
-    const inPrice = price >= priceRange[0] && price <= priceRange[1];
-
-    return inCategory && inBrand && inPrice;
+    return inCategory && inBrand && price >= priceRange[0] && price <= priceRange[1];
   });
 
   // Collect unique brands
   const uniqueBrands = [...new Set(products.map((p) => p.brand))];
+
+  // Collect unique categories present in current weekly deals
+  const availableCategories = Array.from(new Set(products.map((p) => p.category)));
+  const categoryButtons = ["All", ...availableCategories.map((cat) => dbToLabelMap[cat])];
 
   if (loading) return <p className="text-center">Loading weekly deals...</p>;
 
@@ -76,15 +103,15 @@ const WeeklyDealsPage = () => {
         <div className="mb-6">
           <h3 className="font-semibold mb-2">Category</h3>
           <ul className="space-y-2">
-            {Object.keys(categoryMap).map((cat) => (
-              <li key={cat}>
+            {categoryButtons.map((label) => (
+              <li key={label}>
                 <button
-                  onClick={() => setCategoryFilter(categoryMap[cat])}
+                  onClick={() => setCategoryFilter(labelToDbMap[label])}
                   className={`w-full text-left hover:underline ${
-                    categoryFilter === categoryMap[cat] && "font-bold"
+                    categoryFilter === labelToDbMap[label] && "font-bold"
                   }`}
                 >
-                  {cat}
+                  {label}
                 </button>
               </li>
             ))}
@@ -134,7 +161,7 @@ const WeeklyDealsPage = () => {
         {filteredProducts.length === 0 ? (
           <p>No discounted products found.</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
             {filteredProducts.map((product, index) => (
               <HomeSectionCard
                 key={index}
