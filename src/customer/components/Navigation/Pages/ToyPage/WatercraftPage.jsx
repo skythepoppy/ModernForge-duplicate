@@ -22,7 +22,7 @@ const WatercraftPage = () => {
         const watercrafts = data.filter((item) => item.category === "ship");
         setProducts(watercrafts);
 
-        // Initialize price slider range based on aircraft prices
+        // Initialize price slider range based on watercraft prices
         if (watercrafts.length > 0) {
           const prices = watercrafts.map((p) => p.discountedPrice || p.price);
           setPriceRange([Math.min(...prices), Math.max(...prices)]);
