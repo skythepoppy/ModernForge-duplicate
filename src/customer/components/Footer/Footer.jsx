@@ -18,7 +18,7 @@ const Footer = () => {
         if (!emailRegex.test(email)) return setMessage("Please enter a valid email");
 
         try {
-            const res = await fetch("/api/newsletter", {
+            const res = await fetch("http://localhost:5050/api/newsletter", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),
