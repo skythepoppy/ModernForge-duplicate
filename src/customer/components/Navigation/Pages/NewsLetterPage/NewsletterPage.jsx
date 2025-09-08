@@ -25,7 +25,7 @@ export default function NewsletterPage() {
         setStatus("");
 
         try {
-            const res = await fetch("http://3.15.174.1:5050/api/newsletter", {
+            const res = await fetch("https://sri-gp-hardly-frog.trycloudflare.com/api/newsletter", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),

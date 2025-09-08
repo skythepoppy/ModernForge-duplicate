@@ -17,7 +17,7 @@ const HomeSectionCarousel = ({ category, status, limit = 5, autoPlay = false, sh
   useEffect(() => {
     async function fetchData() {
       try {
-        const url = new URL('http://3.15.174.1:5050/api/toys');
+        const url = new URL('https://sri-gp-hardly-frog.trycloudflare.com/api/toys');
         if (category) url.searchParams.append('category', category);
         if (status) url.searchParams.append('status', status);
 

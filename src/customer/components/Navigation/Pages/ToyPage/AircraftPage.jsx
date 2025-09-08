@@ -19,7 +19,7 @@ const AircraftPage = () => {
     useEffect(() => {
         async function fetchAircrafts() {
             try {
-                const response = await fetch("http://3.15.174.1:5050/api/toys");
+                const response = await fetch("https://sri-gp-hardly-frog.trycloudflare.com/api/toys");
                 const data = await response.json();
 
                 const aircrafts = data.filter((item) => item.category === "airplane");
