@@ -28,7 +28,7 @@ const SupportPage = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://3.144.239.59:5050/api/wholesale', {
+            const response = await fetch('http://3.15.174.1:5050/api/wholesale', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),

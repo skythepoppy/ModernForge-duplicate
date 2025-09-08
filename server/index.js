@@ -8,7 +8,7 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5050;
 
-app.use(cors());
+app.use(cors({ origin: 'https://modern-forge-duplicate.vercel.app/' }));
 app.use(express.json());
 
 // --- MySQL setup ---

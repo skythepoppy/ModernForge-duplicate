@@ -19,7 +19,7 @@ const AutomobilePage = () => {
   useEffect(() => {
     async function fetchAutmobiles() {
       try {
-        const response = await fetch("http://3.144.239.59:5050/api/toys");
+        const response = await fetch("http://3.15.174.1:5050/api/toys");
         const data = await response.json();
 
         const automobiles = data.filter((item) => item.category === "automobile");
