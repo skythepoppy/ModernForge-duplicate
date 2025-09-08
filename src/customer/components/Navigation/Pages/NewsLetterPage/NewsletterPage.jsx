@@ -25,7 +25,7 @@ export default function NewsletterPage() {
         setStatus("");
 
         try {
-            const res = await fetch("http://localhost:5050/api/newsletter", {
+            const res = await fetch("http://3.144.239.59:5050/api/newsletter", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),

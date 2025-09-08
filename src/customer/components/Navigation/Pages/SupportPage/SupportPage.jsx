@@ -22,7 +22,7 @@ const SupportPage = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:5050/api/support', {
+            const response = await fetch('http://3.144.239.59:5050/api/support', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),

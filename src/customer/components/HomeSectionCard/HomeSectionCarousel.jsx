@@ -17,7 +17,7 @@ const HomeSectionCarousel = ({ category, status, limit = 5, autoPlay = false, sh
   useEffect(() => {
     async function fetchData() {
       try {
-        const url = new URL('http://localhost:5050/api/toys');
+        const url = new URL('http://3.144.239.59:5050/api/toys');
         if (category) url.searchParams.append('category', category);
         if (status) url.searchParams.append('status', status);
 
