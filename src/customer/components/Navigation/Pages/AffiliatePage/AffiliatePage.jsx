@@ -23,7 +23,7 @@ const AffiliatePage = () => {
         setLoading(true);
 
         try {
-            const response = await fetch("https://sri-gp-hardly-frog.trycloudflare.com/api/affiliate", {
+            const response = await fetch("https://collaborative-hidden-competitions-taste.trycloudflare.com/api/affiliate", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),

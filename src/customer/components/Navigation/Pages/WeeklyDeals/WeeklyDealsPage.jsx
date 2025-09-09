@@ -44,7 +44,7 @@ const WeeklyDealsPage = () => {
   useEffect(() => {
     async function fetchDeals() {
       try {
-        const response = await fetch("https://sri-gp-hardly-frog.trycloudflare.com/api/toys");
+        const response = await fetch("https://collaborative-hidden-competitions-taste.trycloudflare.com/api/toys");
         const data = await response.json();
 
         const discounted = data.filter((item) => item.discountedPrice);

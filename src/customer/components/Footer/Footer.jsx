@@ -18,7 +18,7 @@ const Footer = () => {
         if (!emailRegex.test(email)) return setMessage("Please enter a valid email");
 
         try {
-            const res = await fetch("https://sri-gp-hardly-frog.trycloudflare.com/api/newsletter", {
+            const res = await fetch("https://collaborative-hidden-competitions-taste.trycloudflare.com/api/newsletter", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),

@@ -25,7 +25,7 @@ export default function ProductPage() {
     useEffect(() => {
         async function fetchProduct() {
             try {
-                const response = await fetch("https://sri-gp-hardly-frog.trycloudflare.com/api/toys");
+                const response = await fetch("https://collaborative-hidden-competitions-taste.trycloudflare.com/api/toys");
                 const data = await response.json();
                 const selectedProduct = data.find((item) => item.id.toString() === productId);
                 setProduct(selectedProduct);

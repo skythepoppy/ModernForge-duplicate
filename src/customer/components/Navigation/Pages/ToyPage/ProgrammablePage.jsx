@@ -19,7 +19,7 @@ const ProgrammablePage = () => {
     useEffect(() => {
         async function fetchProgrammables() {
             try {
-                const response = await fetch("https://sri-gp-hardly-frog.trycloudflare.com/api/toys");
+                const response = await fetch("https://collaborative-hidden-competitions-taste.trycloudflare.com/api/toys");
                 const data = await response.json();
 
                 const programmables = data.filter((item) => item.category === "programmable");
